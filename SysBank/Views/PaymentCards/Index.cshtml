@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SysBank.BLL.Models.PaymentCardsModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista kart płatniczych</h2>
+
+@if (Model.Any()) { 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsBlockedString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDateShort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsBlockedString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDateShort)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeId)
+        </td>
+        <td>
+            @Html.ActionLink("Szczegóły karty", "CardDetails", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>}
+else { @Html.Label("Brak zaakceptowanych kart płatniczych") }

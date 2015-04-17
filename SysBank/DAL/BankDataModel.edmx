@@ -1,0 +1,1880 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SysBankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CurrentBalance" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Provision" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="AvailableBalance" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Interest" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application_Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="File_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Application_Date" Type="date" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="SecondName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="BuildingNumber" Type="nvarchar(max)" />
+          <Property Name="Apartament" Type="nvarchar(max)" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="PlaceOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Pesel" Type="nvarchar(max)" />
+          <Property Name="Nip" Type="nvarchar(max)" />
+          <Property Name="IdentificationNumber" Type="nvarchar(max)" />
+          <Property Name="Regon" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ATMCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BaseCardId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="DailyLimit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ATMCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BaseApplicationId" Type="int" Nullable="false" />
+          <Property Name="DailyLimit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Limit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="GracePeriod" Type="int" Nullable="false" />
+          <Property Name="Provision" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="InterestRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Debit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="BaseCardId" Type="int" Nullable="false" />
+          <Property Name="IsContactless" Type="bit" Nullable="false" />
+          <Property Name="GracePeriodCount" Type="int" Nullable="false" />
+          <Property Name="MinimalRepayment" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Limit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="IsContactless" Type="bit" Nullable="false" />
+          <Property Name="InterestRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MinimalRepayment" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="BaseApplicationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DebitCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BaseCardId" Type="int" Nullable="false" />
+          <Property Name="IsContactless" Type="bit" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="MonthlySpendings" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="DebitCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BaseApplicationId" Type="int" Nullable="false" />
+          <Property Name="IsContactless" Type="bit" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deposites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="GatheredInterests" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DepositType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepositName" Type="varchar" MaxLength="50" />
+          <Property Name="Interest" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="MinimumAmount" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="IsRenewable" Type="bit" Nullable="false" />
+          <Property Name="IsDynamic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dictionaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DictionaryItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DictionaryId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insurance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Document_Id" Type="int" Nullable="false" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" />
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Insurance_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" Nullable="false" />
+          <Property Name="Cost" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Insurance_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="DecisionDate" Type="date" Nullable="false" />
+          <Property Name="DecisionId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsBlocked" Type="bit" Nullable="false" />
+          <Property Name="PIN" Type="int" Nullable="false" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="CardSecurityCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentCardsOperationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationTypeId" Type="int" Nullable="false" />
+          <Property Name="CreditCardId" Type="int" Nullable="false" />
+          <Property Name="CreditCardTypeId" Type="int" Nullable="false" />
+          <Property Name="DateIssued" Type="datetime" Nullable="false" />
+          <Property Name="BalanceChange" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UsersAccounts">
+          <Key>
+            <PropertyRef Name="AccountId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="UsersAccounts" Type="Self.UsersAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersAccounts">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCard_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="ATMCard" Type="Self.ATMCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCard_PaymentCards">
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="1" />
+          <End Role="ATMCard" Type="Self.ATMCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCardApplication_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="ATMCardApplication" Type="Self.ATMCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCardApplication">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCardApplication_PaymentCardApplication">
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="1" />
+          <End Role="ATMCardApplication" Type="Self.ATMCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCard_PaymentCards">
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="1" />
+          <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCardApplication_PaymentCardApplication">
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="1" />
+          <End Role="CreditCardApplication" Type="Self.CreditCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCard_PaymentCards">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="DebitCard" Type="Self.DebitCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCard_PaymentCards1">
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="1" />
+          <End Role="DebitCard" Type="Self.DebitCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCardApplication_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="DebitCardApplication" Type="Self.DebitCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCardApplication">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCardApplication_PaymentCardApplication">
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="1" />
+          <End Role="DebitCardApplication" Type="Self.DebitCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deposites_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Deposites" Type="Self.Deposites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deposites">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deposites_DepositType">
+          <End Role="DepositType" Type="Self.DepositType" Multiplicity="1" />
+          <End Role="Deposites" Type="Self.Deposites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepositType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deposites">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DictionaryItems_Dictionaries">
+          <End Role="Dictionaries" Type="Self.Dictionaries" Multiplicity="1" />
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dictionaries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DictionaryItems">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Insurance_Application_Document">
+          <End Role="Application_Document" Type="Self.Application_Document" Multiplicity="1" />
+          <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application_Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Insurance">
+              <PropertyRef Name="Document_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Insurance_Insurance_Type">
+          <End Role="Insurance_Type" Type="Self.Insurance_Type" Multiplicity="1" />
+          <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurance_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Insurance">
+              <PropertyRef Name="Insurance_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_DictionaryItems">
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_DictionaryItems1">
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="DecisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCards_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCards_DictionaryItems">
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCards">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_DictionaryItems">
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="PaymentCardsOperationHistory" Type="Self.PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="OperationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_DictionaryItems1">
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="PaymentCardsOperationHistory" Type="Self.PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="CreditCardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_PaymentCards">
+          <End Role="PaymentCards" Type="Self.PaymentCards" Multiplicity="1" />
+          <End Role="PaymentCardsOperationHistory" Type="Self.PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="CreditCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UsersAccounts" Type="Self.UsersAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersAccounts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SysBankModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application_Document" EntityType="Self.Application_Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATMCard" EntityType="Self.ATMCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATMCardApplication" EntityType="Self.ATMCardApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditCard" EntityType="Self.CreditCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditCardApplication" EntityType="Self.CreditCardApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DebitCard" EntityType="Self.DebitCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DebitCardApplication" EntityType="Self.DebitCardApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deposites" EntityType="Self.Deposites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepositType" EntityType="Self.DepositType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dictionaries" EntityType="Self.Dictionaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DictionaryItems" EntityType="Self.DictionaryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Insurance" EntityType="Self.Insurance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Insurance_Type" EntityType="Self.Insurance_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentCardApplication" EntityType="Self.PaymentCardApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentCards" EntityType="Self.PaymentCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentCardsOperationHistory" EntityType="Self.PaymentCardsOperationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersAccounts" EntityType="Self.UsersAccounts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_account" Association="Self.FK_account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UsersAccounts" EntitySet="UsersAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCard_Accounts" Association="Self.FK_ATMCard_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ATMCard" EntitySet="ATMCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCard_PaymentCards" Association="Self.FK_ATMCard_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="ATMCard" EntitySet="ATMCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCardApplication_Accounts" Association="Self.FK_ATMCardApplication_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ATMCardApplication" EntitySet="ATMCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCardApplication_PaymentCardApplication" Association="Self.FK_ATMCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="ATMCardApplication" EntitySet="ATMCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCard_PaymentCards" Association="Self.FK_CreditCard_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCardApplication_PaymentCardApplication" Association="Self.FK_CreditCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="CreditCardApplication" EntitySet="CreditCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCard_PaymentCards" Association="Self.FK_DebitCard_PaymentCards">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="DebitCard" EntitySet="DebitCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCard_PaymentCards1" Association="Self.FK_DebitCard_PaymentCards1">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="DebitCard" EntitySet="DebitCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCardApplication_Accounts" Association="Self.FK_DebitCardApplication_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="DebitCardApplication" EntitySet="DebitCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCardApplication_PaymentCardApplication" Association="Self.FK_DebitCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="DebitCardApplication" EntitySet="DebitCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deposites_Accounts" Association="Self.FK_Deposites_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Deposites" EntitySet="Deposites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deposites_DepositType" Association="Self.FK_Deposites_DepositType">
+            <End Role="DepositType" EntitySet="DepositType" />
+            <End Role="Deposites" EntitySet="Deposites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DictionaryItems_Dictionaries" Association="Self.FK_DictionaryItems_Dictionaries">
+            <End Role="Dictionaries" EntitySet="Dictionaries" />
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Insurance_Application_Document" Association="Self.FK_Insurance_Application_Document">
+            <End Role="Application_Document" EntitySet="Application_Document" />
+            <End Role="Insurance" EntitySet="Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Insurance_Insurance_Type" Association="Self.FK_Insurance_Insurance_Type">
+            <End Role="Insurance_Type" EntitySet="Insurance_Type" />
+            <End Role="Insurance" EntitySet="Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_AspNetUsers" Association="Self.FK_PaymentCardApplication_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems" Association="Self.FK_PaymentCardApplication_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems1" Association="Self.FK_PaymentCardApplication_DictionaryItems1">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCards_AspNetUsers" Association="Self.FK_PaymentCards_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCards_DictionaryItems" Association="Self.FK_PaymentCards_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_DictionaryItems" Association="Self.FK_PaymentCardsOperationHistory_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_DictionaryItems1" Association="Self.FK_PaymentCardsOperationHistory_DictionaryItems1">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_PaymentCards" Association="Self.FK_PaymentCardsOperationHistory_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user" Association="Self.FK_user">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UsersAccounts" EntitySet="UsersAccounts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SysBankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Apartament" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PlaceOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Pesel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdentificationNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Regon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_PaymentCardApplication_AspNetUsers" FromRole="AspNetUsers" ToRole="PaymentCardApplication" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_PaymentCards_AspNetUsers" FromRole="AspNetUsers" ToRole="PaymentCards" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.UsersAccounts" FromRole="AspNetUsers" ToRole="Accounts" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SysBankEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Accounts" EntityType="SysBankModel.Accounts" />
+          <EntitySet Name="Application_Document" EntityType="SysBankModel.Application_Document" />
+          <EntitySet Name="ATMCard" EntityType="SysBankModel.ATMCard" />
+          <EntitySet Name="ATMCardApplication" EntityType="SysBankModel.ATMCardApplication" />
+          <EntitySet Name="CreditCard" EntityType="SysBankModel.CreditCard" />
+          <EntitySet Name="CreditCardApplication" EntityType="SysBankModel.CreditCardApplication" />
+          <EntitySet Name="DebitCard" EntityType="SysBankModel.DebitCard" />
+          <EntitySet Name="DebitCardApplication" EntityType="SysBankModel.DebitCardApplication" />
+          <EntitySet Name="Deposites" EntityType="SysBankModel.Deposites" />
+          <EntitySet Name="DepositType" EntityType="SysBankModel.DepositType" />
+          <EntitySet Name="Dictionaries" EntityType="SysBankModel.Dictionaries" />
+          <EntitySet Name="DictionaryItems" EntityType="SysBankModel.DictionaryItems" />
+          <EntitySet Name="Insurance" EntityType="SysBankModel.Insurance" />
+          <EntitySet Name="Insurance_Type" EntityType="SysBankModel.Insurance_Type" />
+          <EntitySet Name="PaymentCardApplication" EntityType="SysBankModel.PaymentCardApplication" />
+          <EntitySet Name="PaymentCards" EntityType="SysBankModel.PaymentCards" />
+          <EntitySet Name="PaymentCardsOperationHistory" EntityType="SysBankModel.PaymentCardsOperationHistory" />
+          <EntitySet Name="sysdiagrams" EntityType="SysBankModel.sysdiagrams" />
+          <AssociationSet Name="FK_ATMCard_Accounts" Association="SysBankModel.FK_ATMCard_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ATMCard" EntitySet="ATMCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCardApplication_Accounts" Association="SysBankModel.FK_ATMCardApplication_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ATMCardApplication" EntitySet="ATMCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCard_PaymentCards" Association="SysBankModel.FK_DebitCard_PaymentCards">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="DebitCard" EntitySet="DebitCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCardApplication_Accounts" Association="SysBankModel.FK_DebitCardApplication_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="DebitCardApplication" EntitySet="DebitCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deposites_Accounts" Association="SysBankModel.FK_Deposites_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Deposites" EntitySet="Deposites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Insurance_Application_Document" Association="SysBankModel.FK_Insurance_Application_Document">
+            <End Role="Application_Document" EntitySet="Application_Document" />
+            <End Role="Insurance" EntitySet="Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_AspNetUsers" Association="SysBankModel.FK_PaymentCardApplication_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCards_AspNetUsers" Association="SysBankModel.FK_PaymentCards_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCard_PaymentCards" Association="SysBankModel.FK_ATMCard_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="ATMCard" EntitySet="ATMCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ATMCardApplication_PaymentCardApplication" Association="SysBankModel.FK_ATMCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="ATMCardApplication" EntitySet="ATMCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCard_PaymentCards" Association="SysBankModel.FK_CreditCard_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditCardApplication_PaymentCardApplication" Association="SysBankModel.FK_CreditCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="CreditCardApplication" EntitySet="CreditCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCard_PaymentCards1" Association="SysBankModel.FK_DebitCard_PaymentCards1">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="DebitCard" EntitySet="DebitCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DebitCardApplication_PaymentCardApplication" Association="SysBankModel.FK_DebitCardApplication_PaymentCardApplication">
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+            <End Role="DebitCardApplication" EntitySet="DebitCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deposites_DepositType" Association="SysBankModel.FK_Deposites_DepositType">
+            <End Role="DepositType" EntitySet="DepositType" />
+            <End Role="Deposites" EntitySet="Deposites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DictionaryItems_Dictionaries" Association="SysBankModel.FK_DictionaryItems_Dictionaries">
+            <End Role="Dictionaries" EntitySet="Dictionaries" />
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems" Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems1" Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCards_DictionaryItems" Association="SysBankModel.FK_PaymentCards_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_DictionaryItems" Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_DictionaryItems1" Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Insurance_Insurance_Type" Association="SysBankModel.FK_Insurance_Insurance_Type">
+            <End Role="Insurance_Type" EntitySet="Insurance_Type" />
+            <End Role="Insurance" EntitySet="Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardsOperationHistory_PaymentCards" Association="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards">
+            <End Role="PaymentCards" EntitySet="PaymentCards" />
+            <End Role="PaymentCardsOperationHistory" EntitySet="PaymentCardsOperationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="UsersAccounts" Association="SysBankModel.UsersAccounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentBalance" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Provision" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="AvailableBalance" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Interest" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ATMCard" Relationship="SysBankModel.FK_ATMCard_Accounts" FromRole="Accounts" ToRole="ATMCard" />
+          <NavigationProperty Name="ATMCardApplication" Relationship="SysBankModel.FK_ATMCardApplication_Accounts" FromRole="Accounts" ToRole="ATMCardApplication" />
+          <NavigationProperty Name="DebitCard" Relationship="SysBankModel.FK_DebitCard_PaymentCards" FromRole="Accounts" ToRole="DebitCard" />
+          <NavigationProperty Name="DebitCardApplication" Relationship="SysBankModel.FK_DebitCardApplication_Accounts" FromRole="Accounts" ToRole="DebitCardApplication" />
+          <NavigationProperty Name="Deposites" Relationship="SysBankModel.FK_Deposites_Accounts" FromRole="Accounts" ToRole="Deposites" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SysBankModel.UsersAccounts" FromRole="Accounts" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Application_Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="File_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Application_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Insurance" Relationship="SysBankModel.FK_Insurance_Application_Document" FromRole="Application_Document" ToRole="Insurance" />
+        </EntityType>
+        <EntityType Name="ATMCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BaseCardId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="DailyLimit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.FK_ATMCard_Accounts" FromRole="ATMCard" ToRole="Accounts" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_ATMCard_PaymentCards" FromRole="ATMCard" ToRole="PaymentCards" />
+        </EntityType>
+        <EntityType Name="ATMCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BaseApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="DailyLimit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.FK_ATMCardApplication_Accounts" FromRole="ATMCardApplication" ToRole="Accounts" />
+          <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_ATMCardApplication_PaymentCardApplication" FromRole="ATMCardApplication" ToRole="PaymentCardApplication" />
+        </EntityType>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Limit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="GracePeriod" Type="Int32" Nullable="false" />
+          <Property Name="Provision" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Debit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="BaseCardId" Type="Int32" Nullable="false" />
+          <Property Name="IsContactless" Type="Boolean" Nullable="false" />
+          <Property Name="GracePeriodCount" Type="Int32" Nullable="false" />
+          <Property Name="MinimalRepayment" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_CreditCard_PaymentCards" FromRole="CreditCard" ToRole="PaymentCards" />
+        </EntityType>
+        <EntityType Name="CreditCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Limit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="IsContactless" Type="Boolean" Nullable="false" />
+          <Property Name="InterestRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MinimalRepayment" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="BaseApplicationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_CreditCardApplication_PaymentCardApplication" FromRole="CreditCardApplication" ToRole="PaymentCardApplication" />
+        </EntityType>
+        <EntityType Name="DebitCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BaseCardId" Type="Int32" Nullable="false" />
+          <Property Name="IsContactless" Type="Boolean" Nullable="false" />
+          <Property Name="MonthlyLimit" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="MonthlySpendings" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.FK_DebitCard_PaymentCards" FromRole="DebitCard" ToRole="Accounts" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_DebitCard_PaymentCards1" FromRole="DebitCard" ToRole="PaymentCards" />
+        </EntityType>
+        <EntityType Name="DebitCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BaseApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="IsContactless" Type="Boolean" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.FK_DebitCardApplication_Accounts" FromRole="DebitCardApplication" ToRole="Accounts" />
+          <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_DebitCardApplication_PaymentCardApplication" FromRole="DebitCardApplication" ToRole="PaymentCardApplication" />
+        </EntityType>
+        <EntityType Name="Deposites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="GatheredInterests" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Accounts" Relationship="SysBankModel.FK_Deposites_Accounts" FromRole="Deposites" ToRole="Accounts" />
+          <NavigationProperty Name="DepositType" Relationship="SysBankModel.FK_Deposites_DepositType" FromRole="Deposites" ToRole="DepositType" />
+        </EntityType>
+        <EntityType Name="DepositType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DepositName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Interest" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="MinimumAmount" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="IsRenewable" Type="Boolean" Nullable="false" />
+          <Property Name="IsDynamic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Deposites" Relationship="SysBankModel.FK_Deposites_DepositType" FromRole="DepositType" ToRole="Deposites" />
+        </EntityType>
+        <EntityType Name="Dictionaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DictionaryItems" Relationship="SysBankModel.FK_DictionaryItems_Dictionaries" FromRole="Dictionaries" ToRole="DictionaryItems" />
+        </EntityType>
+        <EntityType Name="DictionaryItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DictionaryId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dictionaries" Relationship="SysBankModel.FK_DictionaryItems_Dictionaries" FromRole="DictionaryItems" ToRole="Dictionaries" />
+          <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCardApplication" />
+          <NavigationProperty Name="PaymentCardApplication1" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" FromRole="DictionaryItems" ToRole="PaymentCardApplication" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_PaymentCards_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCards" />
+          <NavigationProperty Name="PaymentCardsOperationHistory" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCardsOperationHistory" />
+          <NavigationProperty Name="PaymentCardsOperationHistory1" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" FromRole="DictionaryItems" ToRole="PaymentCardsOperationHistory" />
+        </EntityType>
+        <EntityType Name="Insurance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Document_Id" Type="Int32" Nullable="false" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
+          <Property Name="Employee_Id" Type="Int32" Nullable="false" />
+          <Property Name="Insurance_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cost" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Application_Document" Relationship="SysBankModel.FK_Insurance_Application_Document" FromRole="Insurance" ToRole="Application_Document" />
+          <NavigationProperty Name="Insurance_Type" Relationship="SysBankModel.FK_Insurance_Insurance_Type" FromRole="Insurance" ToRole="Insurance_Type" />
+        </EntityType>
+        <EntityType Name="Insurance_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Insurance" Relationship="SysBankModel.FK_Insurance_Insurance_Type" FromRole="Insurance_Type" ToRole="Insurance" />
+        </EntityType>
+        <EntityType Name="PaymentCardApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="DecisionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DecisionId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SysBankModel.FK_PaymentCardApplication_AspNetUsers" FromRole="PaymentCardApplication" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ATMCardApplication" Relationship="SysBankModel.FK_ATMCardApplication_PaymentCardApplication" FromRole="PaymentCardApplication" ToRole="ATMCardApplication" />
+          <NavigationProperty Name="CreditCardApplication" Relationship="SysBankModel.FK_CreditCardApplication_PaymentCardApplication" FromRole="PaymentCardApplication" ToRole="CreditCardApplication" />
+          <NavigationProperty Name="DebitCardApplication" Relationship="SysBankModel.FK_DebitCardApplication_PaymentCardApplication" FromRole="PaymentCardApplication" ToRole="DebitCardApplication" />
+          <NavigationProperty Name="DictionaryItems" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems" FromRole="PaymentCardApplication" ToRole="DictionaryItems" />
+          <NavigationProperty Name="DictionaryItems1" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" FromRole="PaymentCardApplication" ToRole="DictionaryItems" />
+        </EntityType>
+        <EntityType Name="PaymentCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsBlocked" Type="Boolean" Nullable="false" />
+          <Property Name="PIN" Type="Int32" Nullable="false" />
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CardSecurityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SysBankModel.FK_PaymentCards_AspNetUsers" FromRole="PaymentCards" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ATMCard" Relationship="SysBankModel.FK_ATMCard_PaymentCards" FromRole="PaymentCards" ToRole="ATMCard" />
+          <NavigationProperty Name="CreditCard" Relationship="SysBankModel.FK_CreditCard_PaymentCards" FromRole="PaymentCards" ToRole="CreditCard" />
+          <NavigationProperty Name="DebitCard" Relationship="SysBankModel.FK_DebitCard_PaymentCards1" FromRole="PaymentCards" ToRole="DebitCard" />
+          <NavigationProperty Name="DictionaryItems" Relationship="SysBankModel.FK_PaymentCards_DictionaryItems" FromRole="PaymentCards" ToRole="DictionaryItems" />
+          <NavigationProperty Name="PaymentCardsOperationHistory" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards" FromRole="PaymentCards" ToRole="PaymentCardsOperationHistory" />
+        </EntityType>
+        <EntityType Name="PaymentCardsOperationHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreditCardId" Type="Int32" Nullable="false" />
+          <Property Name="CreditCardTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BalanceChange" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <NavigationProperty Name="DictionaryItems" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" FromRole="PaymentCardsOperationHistory" ToRole="DictionaryItems" />
+          <NavigationProperty Name="DictionaryItems1" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" FromRole="PaymentCardsOperationHistory" ToRole="DictionaryItems" />
+          <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards" FromRole="PaymentCardsOperationHistory" ToRole="PaymentCards" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_ATMCard_Accounts">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="SysBankModel.ATMCard" Role="ATMCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCardApplication_Accounts">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="SysBankModel.ATMCardApplication" Role="ATMCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCardApplication">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCard_PaymentCards">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="SysBankModel.DebitCard" Role="DebitCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCard">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCardApplication_Accounts">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="SysBankModel.DebitCardApplication" Role="DebitCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCardApplication">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deposites_Accounts">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="SysBankModel.Deposites" Role="Deposites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deposites">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Insurance_Application_Document">
+          <End Type="SysBankModel.Application_Document" Role="Application_Document" Multiplicity="1" />
+          <End Type="SysBankModel.Insurance" Role="Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application_Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Insurance">
+              <PropertyRef Name="Document_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_AspNetUsers">
+          <End Type="SysBankModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCards_AspNetUsers">
+          <End Type="SysBankModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCard_PaymentCards">
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="1" />
+          <End Type="SysBankModel.ATMCard" Role="ATMCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ATMCardApplication_PaymentCardApplication">
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="1" />
+          <End Type="SysBankModel.ATMCardApplication" Role="ATMCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ATMCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCard_PaymentCards">
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="1" />
+          <End Type="SysBankModel.CreditCard" Role="CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditCardApplication_PaymentCardApplication">
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="1" />
+          <End Type="SysBankModel.CreditCardApplication" Role="CreditCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CreditCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCard_PaymentCards1">
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="1" />
+          <End Type="SysBankModel.DebitCard" Role="DebitCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCard">
+              <PropertyRef Name="BaseCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DebitCardApplication_PaymentCardApplication">
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="1" />
+          <End Type="SysBankModel.DebitCardApplication" Role="DebitCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCardApplication">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DebitCardApplication">
+              <PropertyRef Name="BaseApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deposites_DepositType">
+          <End Type="SysBankModel.DepositType" Role="DepositType" Multiplicity="1" />
+          <End Type="SysBankModel.Deposites" Role="Deposites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepositType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deposites">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DictionaryItems_Dictionaries">
+          <End Type="SysBankModel.Dictionaries" Role="Dictionaries" Multiplicity="1" />
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dictionaries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DictionaryItems">
+              <PropertyRef Name="DictionaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_DictionaryItems">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardApplication_DictionaryItems1">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="DecisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCards_DictionaryItems">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCards">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_DictionaryItems">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardsOperationHistory" Role="PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="OperationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_DictionaryItems1">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardsOperationHistory" Role="PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="CreditCardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Insurance_Insurance_Type">
+          <End Type="SysBankModel.Insurance_Type" Role="Insurance_Type" Multiplicity="1" />
+          <End Type="SysBankModel.Insurance" Role="Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Insurance_Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Insurance">
+              <PropertyRef Name="Insurance_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCardsOperationHistory_PaymentCards">
+          <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="1" />
+          <End Type="SysBankModel.PaymentCardsOperationHistory" Role="PaymentCardsOperationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardsOperationHistory">
+              <PropertyRef Name="CreditCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersAccounts">
+          <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="*" />
+          <End Type="SysBankModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SysBankModelStoreContainer" CdmEntityContainer="SysBankEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SysBankModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="SysBankModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="SysBankModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="SysBankModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SysBankModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Regon" ColumnName="Regon" />
+                <ScalarProperty Name="IdentificationNumber" ColumnName="IdentificationNumber" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Apartament" ColumnName="Apartament" />
+                <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SysBankModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="SysBankModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="AvailableBalance" ColumnName="AvailableBalance" />
+                <ScalarProperty Name="Provision" ColumnName="Provision" />
+                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application_Document">
+            <EntityTypeMapping TypeName="SysBankModel.Application_Document">
+              <MappingFragment StoreEntitySet="Application_Document">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Application_Date" ColumnName="Application_Date" />
+                <ScalarProperty Name="File_Name" ColumnName="File_Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATMCard">
+            <EntityTypeMapping TypeName="SysBankModel.ATMCard">
+              <MappingFragment StoreEntitySet="ATMCard">
+                <ScalarProperty Name="DailyLimit" ColumnName="DailyLimit" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="BaseCardId" ColumnName="BaseCardId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATMCardApplication">
+            <EntityTypeMapping TypeName="SysBankModel.ATMCardApplication">
+              <MappingFragment StoreEntitySet="ATMCardApplication">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="DailyLimit" ColumnName="DailyLimit" />
+                <ScalarProperty Name="BaseApplicationId" ColumnName="BaseApplicationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditCard">
+            <EntityTypeMapping TypeName="SysBankModel.CreditCard">
+              <MappingFragment StoreEntitySet="CreditCard">
+                <ScalarProperty Name="MinimalRepayment" ColumnName="MinimalRepayment" />
+                <ScalarProperty Name="GracePeriodCount" ColumnName="GracePeriodCount" />
+                <ScalarProperty Name="IsContactless" ColumnName="IsContactless" />
+                <ScalarProperty Name="BaseCardId" ColumnName="BaseCardId" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="Provision" ColumnName="Provision" />
+                <ScalarProperty Name="GracePeriod" ColumnName="GracePeriod" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditCardApplication">
+            <EntityTypeMapping TypeName="SysBankModel.CreditCardApplication">
+              <MappingFragment StoreEntitySet="CreditCardApplication">
+                <ScalarProperty Name="BaseApplicationId" ColumnName="BaseApplicationId" />
+                <ScalarProperty Name="MinimalRepayment" ColumnName="MinimalRepayment" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="IsContactless" ColumnName="IsContactless" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DebitCard">
+            <EntityTypeMapping TypeName="SysBankModel.DebitCard">
+              <MappingFragment StoreEntitySet="DebitCard">
+                <ScalarProperty Name="MonthlySpendings" ColumnName="MonthlySpendings" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MonthlyLimit" ColumnName="MonthlyLimit" />
+                <ScalarProperty Name="IsContactless" ColumnName="IsContactless" />
+                <ScalarProperty Name="BaseCardId" ColumnName="BaseCardId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DebitCardApplication">
+            <EntityTypeMapping TypeName="SysBankModel.DebitCardApplication">
+              <MappingFragment StoreEntitySet="DebitCardApplication">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="IsContactless" ColumnName="IsContactless" />
+                <ScalarProperty Name="BaseApplicationId" ColumnName="BaseApplicationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deposites">
+            <EntityTypeMapping TypeName="SysBankModel.Deposites">
+              <MappingFragment StoreEntitySet="Deposites">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="GatheredInterests" ColumnName="GatheredInterests" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepositType">
+            <EntityTypeMapping TypeName="SysBankModel.DepositType">
+              <MappingFragment StoreEntitySet="DepositType">
+                <ScalarProperty Name="IsDynamic" ColumnName="IsDynamic" />
+                <ScalarProperty Name="IsRenewable" ColumnName="IsRenewable" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="MinimumAmount" ColumnName="MinimumAmount" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="DepositName" ColumnName="DepositName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dictionaries">
+            <EntityTypeMapping TypeName="SysBankModel.Dictionaries">
+              <MappingFragment StoreEntitySet="Dictionaries">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DictionaryItems">
+            <EntityTypeMapping TypeName="SysBankModel.DictionaryItems">
+              <MappingFragment StoreEntitySet="DictionaryItems">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DictionaryId" ColumnName="DictionaryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insurance">
+            <EntityTypeMapping TypeName="SysBankModel.Insurance">
+              <MappingFragment StoreEntitySet="Insurance">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Insurance_Type_Id" ColumnName="Insurance_Type_Id" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Document_Id" ColumnName="Document_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Insurance_Type">
+            <EntityTypeMapping TypeName="SysBankModel.Insurance_Type">
+              <MappingFragment StoreEntitySet="Insurance_Type">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentCardApplication">
+            <EntityTypeMapping TypeName="SysBankModel.PaymentCardApplication">
+              <MappingFragment StoreEntitySet="PaymentCardApplication">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DecisionId" ColumnName="DecisionId" />
+                <ScalarProperty Name="DecisionDate" ColumnName="DecisionDate" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentCards">
+            <EntityTypeMapping TypeName="SysBankModel.PaymentCards">
+              <MappingFragment StoreEntitySet="PaymentCards">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="CardSecurityCode" ColumnName="CardSecurityCode" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="IsBlocked" ColumnName="IsBlocked" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentCardsOperationHistory">
+            <EntityTypeMapping TypeName="SysBankModel.PaymentCardsOperationHistory">
+              <MappingFragment StoreEntitySet="PaymentCardsOperationHistory">
+                <ScalarProperty Name="BalanceChange" ColumnName="BalanceChange" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="CreditCardTypeId" ColumnName="CreditCardTypeId" />
+                <ScalarProperty Name="CreditCardId" ColumnName="CreditCardId" />
+                <ScalarProperty Name="OperationTypeId" ColumnName="OperationTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SysBankModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UsersAccounts" TypeName="SysBankModel.UsersAccounts" StoreEntitySet="UsersAccounts">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Accounts">
+              <ScalarProperty Name="Id" ColumnName="AccountId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

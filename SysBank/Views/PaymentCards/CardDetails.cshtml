@@ -1,0 +1,40 @@
+﻿@model SysBank.BLL.Models.PaymentCardsModel
+
+@{
+    ViewBag.Title = "CardDetails";
+}
+
+<h2>Szczegóły karty @Model.TypeId</h2>
+
+<div>
+    <h4>PaymentCardsModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IsBlocked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsBlocked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDateShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDateShort)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Powrót do listy kart", "Index")
+</p>
