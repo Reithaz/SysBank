@@ -237,8 +237,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CreationDate" Type="date" Nullable="false" />
           <Property Name="TypeId" Type="int" Nullable="false" />
-          <Property Name="DecisionDate" Type="date" Nullable="false" />
-          <Property Name="DecisionId" Type="int" Nullable="false" />
+          <Property Name="DecisionDate" Type="date" />
+          <Property Name="DecisionId" Type="int" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="PaymentCards">
@@ -557,7 +557,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PaymentCardApplication_DictionaryItems1">
-          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="1" />
+          <End Role="DictionaryItems" Type="Self.DictionaryItems" Multiplicity="0..1" />
           <End Role="PaymentCardApplication" Type="Self.PaymentCardApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DictionaryItems">
@@ -1001,10 +1001,6 @@
             <End Role="DictionaryItems" EntitySet="DictionaryItems" />
             <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
           </AssociationSet>
-          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems1" Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1">
-            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
-            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
-          </AssociationSet>
           <AssociationSet Name="FK_PaymentCards_DictionaryItems" Association="SysBankModel.FK_PaymentCards_DictionaryItems">
             <End Role="DictionaryItems" EntitySet="DictionaryItems" />
             <End Role="PaymentCards" EntitySet="PaymentCards" />
@@ -1028,6 +1024,10 @@
           <AssociationSet Name="UsersAccounts" Association="SysBankModel.UsersAccounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCardApplication_DictionaryItems1" Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1">
+            <End Role="DictionaryItems" EntitySet="DictionaryItems" />
+            <End Role="PaymentCardApplication" EntitySet="PaymentCardApplication" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Accounts">
@@ -1178,10 +1178,10 @@
           <Property Name="Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Dictionaries" Relationship="SysBankModel.FK_DictionaryItems_Dictionaries" FromRole="DictionaryItems" ToRole="Dictionaries" />
           <NavigationProperty Name="PaymentCardApplication" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCardApplication" />
-          <NavigationProperty Name="PaymentCardApplication1" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" FromRole="DictionaryItems" ToRole="PaymentCardApplication" />
           <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_PaymentCards_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCards" />
           <NavigationProperty Name="PaymentCardsOperationHistory" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" FromRole="DictionaryItems" ToRole="PaymentCardsOperationHistory" />
           <NavigationProperty Name="PaymentCardsOperationHistory1" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" FromRole="DictionaryItems" ToRole="PaymentCardsOperationHistory" />
+          <NavigationProperty Name="PaymentCardApplication1" Relationship="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" FromRole="DictionaryItems" ToRole="PaymentCardApplication" />
         </EntityType>
         <EntityType Name="Insurance">
           <Key>
@@ -1215,8 +1215,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TypeId" Type="Int32" Nullable="false" />
-          <Property Name="DecisionDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DecisionId" Type="Int32" Nullable="false" />
+          <Property Name="DecisionDate" Type="DateTime" Precision="0" />
+          <Property Name="DecisionId" Type="Int32" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="SysBankModel.FK_PaymentCardApplication_AspNetUsers" FromRole="PaymentCardApplication" ToRole="AspNetUsers" />
           <NavigationProperty Name="ATMCardApplication" Relationship="SysBankModel.FK_ATMCardApplication_PaymentCardApplication" FromRole="PaymentCardApplication" ToRole="ATMCardApplication" />
@@ -1473,18 +1473,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PaymentCardApplication_DictionaryItems1">
-          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
-          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DictionaryItems">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PaymentCardApplication">
-              <PropertyRef Name="DecisionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PaymentCards_DictionaryItems">
           <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="1" />
           <End Type="SysBankModel.PaymentCards" Role="PaymentCards" Multiplicity="*" />
@@ -1548,6 +1536,18 @@
         <Association Name="UsersAccounts">
           <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="*" />
           <End Type="SysBankModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PaymentCardApplication_DictionaryItems1">
+          <End Type="SysBankModel.DictionaryItems" Role="DictionaryItems" Multiplicity="0..1" />
+          <End Type="SysBankModel.PaymentCardApplication" Role="PaymentCardApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DictionaryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCardApplication">
+              <PropertyRef Name="DecisionId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>

@@ -1,0 +1,65 @@
+﻿@model SysBank.BLL.Models.BaseCardApplicationModel
+@{
+    ViewBag.Title = "BaseCardApplication";
+}
+
+<h2>BaseCardApplication</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+@Html.DropDownListFor(model => model.CardTypeId, Model.CardTypes, new { id = "cardTypesDropdown" })
+
+<div id="creditCardApp">@Html.EditorFor(model => model.CreditCardApplication)</div>
+<div id="debitCardApp">@Html.EditorFor(model => model.DebitCardApplication)</div>
+<div id="atmCardApp">@Html.EditorFor(model => model.ATMCardApplication)</div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="submitButton" value="Złóż wniosek" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+    <script>
+        $(document).ready(function () {
+            $("#creditCardApp").hide();
+            $("#debitCardApp").hide();
+            $("#atmCardApp").hide();
+            document.getElementById("submitButton").style.display = 'none';
+        });
+        $("#cardTypesDropdown").change(function () {
+            var hasAnyAccount = "@Model.HasAnyAccount";
+            var selectedID = $(this).val();
+            if (selectedID == "1001") {
+                $("#creditCardApp").show();
+                $("#debitCardApp").hide();
+                $("#atmCardApp").hide();
+                document.getElementById("submitButton").style.display = 'block';
+            }
+            else if (selectedID == "1002") {
+                $("#creditCardApp").hide();
+                $("#atmCardApp").hide();
+                $("#debitCardApp").show();
+                if(hasAnyAccount != "False"){
+                    document.getElementById("submitButton").style.display = 'block';
+                } else document.getElementById("submitButton").style.display = 'none'
+            }
+            else if (selectedID == "1003") {
+                $("#creditCardApp").hide();
+                $("#atmCardApp").show();
+                $("#debitCardApp").hide();
+                if(hasAnyAccount != "False"){
+                    document.getElementById("submitButton").style.display = 'block';
+                } else document.getElementById("submitButton").style.display = 'none'
+            }
+            else {
+                $("#creditCardApp").hide();
+                $("#debitCardApp").hide();
+                $("#atmCardApp").hide();
+                document.getElementById("submitButton").style.display = 'none';
+            }
+        });
+
+
+    </script>

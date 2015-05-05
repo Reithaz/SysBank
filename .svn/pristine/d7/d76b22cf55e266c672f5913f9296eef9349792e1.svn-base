@@ -18,10 +18,5 @@ namespace SysBank.DAL.DAO
         {
             return context.AspNetUsers.Where(x => x.Id == id).SingleOrDefault();
         }
-
-        public List<Accounts> GetUserAccountsByUserId(string id)
-        {
-            return context.Accounts.Where(x => x.UserId == id).ToList();
-        }
     }
 }

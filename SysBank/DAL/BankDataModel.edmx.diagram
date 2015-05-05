@@ -48,13 +48,13 @@
         <AssociationConnector Association="SysBankModel.FK_Deposites_DepositType" />
         <AssociationConnector Association="SysBankModel.FK_DictionaryItems_Dictionaries" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems" />
-        <AssociationConnector Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCards_DictionaryItems" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" />
         <AssociationConnector Association="SysBankModel.FK_Insurance_Insurance_Type" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards" />
         <AssociationConnector Association="SysBankModel.UsersAccounts" />
+        <AssociationConnector Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

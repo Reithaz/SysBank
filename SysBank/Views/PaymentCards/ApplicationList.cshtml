@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SysBank.BLL.Models.BaseCardApplicationModel>
+
+@{
+    ViewBag.Title = "Lista wniosków";
+}
+
+<h2>Lista Twoich wniosków o karty płatnicze</h2>
+@if (Model.Any()) { 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CardTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecisionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Decision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasAnyAccount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardTypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DecisionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Decision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasAnyAccount)
+        </td>
+        <td>
+            @Html.ActionLink("Szczegóły wniosku", "ApplicationDetails", new { id=item.Id })
+        </td>
+    </tr>
+}
+</table>
+}else {
+<div>Nie złożyłes jeszcze żadnego wniosku. </div>
+}

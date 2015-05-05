@@ -1,0 +1,33 @@
+﻿@model SysBank.BLL.Models.CreditCardApplication
+
+@{
+    ViewBag.Title = "CreditCardApplication";
+}
+
+<h2>CreditCardApplication</h2>
+
+    
+    <div class="form-horizontal">
+        <h4>CreditCardApplication</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Limit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Limit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Limit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsContactless, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsContactless)
+                    @Html.ValidationMessageFor(model => model.IsContactless, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+

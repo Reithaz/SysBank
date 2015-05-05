@@ -1,0 +1,39 @@
+﻿@model SysBank.BLL.Models.ATMCardApplication
+
+@{
+    ViewBag.Title = "ATMCardApplication";
+}
+
+<h2>ATMCardApplication</h2>
+
+    
+    <div class="form-horizontal">
+    <h4>ATMCardApplication</h4>
+    <hr />
+    @if (Model.Accounts.Any())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DailyLimit, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DailyLimit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DailyLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccountId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AccountId, Model.Accounts)
+            </div>
+        </div>
+    }
+    else
+    { <div>Aktualnie nie posiadasz otwartych rachunków. W przypadku tego typu karty jest to wymagane, aby dokonać powiązania. Aby otworzyć nowy rachunek kliknij tutaj:</div>
+    <button class="btn btn-success">Otwórz nowy rachunek</button>
+    }
+</div>
+
+
+

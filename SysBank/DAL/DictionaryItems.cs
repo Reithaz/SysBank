@@ -17,10 +17,10 @@ namespace SysBank.DAL
         public DictionaryItems()
         {
             this.PaymentCardApplication = new HashSet<PaymentCardApplication>();
-            this.PaymentCardApplication1 = new HashSet<PaymentCardApplication>();
             this.PaymentCards = new HashSet<PaymentCards>();
             this.PaymentCardsOperationHistory = new HashSet<PaymentCardsOperationHistory>();
             this.PaymentCardsOperationHistory1 = new HashSet<PaymentCardsOperationHistory>();
+            this.PaymentCardApplication1 = new HashSet<PaymentCardApplication>();
         }
     
         public int Id { get; set; }
@@ -29,9 +29,9 @@ namespace SysBank.DAL
     
         public virtual Dictionaries Dictionaries { get; set; }
         public virtual ICollection<PaymentCardApplication> PaymentCardApplication { get; set; }
-        public virtual ICollection<PaymentCardApplication> PaymentCardApplication1 { get; set; }
         public virtual ICollection<PaymentCards> PaymentCards { get; set; }
         public virtual ICollection<PaymentCardsOperationHistory> PaymentCardsOperationHistory { get; set; }
         public virtual ICollection<PaymentCardsOperationHistory> PaymentCardsOperationHistory1 { get; set; }
+        public virtual ICollection<PaymentCardApplication> PaymentCardApplication1 { get; set; }
     }
 }

@@ -24,8 +24,8 @@ namespace SysBank.DAL
         public int Id { get; set; }
         public System.DateTime CreationDate { get; set; }
         public int TypeId { get; set; }
-        public System.DateTime DecisionDate { get; set; }
-        public int DecisionId { get; set; }
+        public Nullable<System.DateTime> DecisionDate { get; set; }
+        public Nullable<int> DecisionId { get; set; }
         public string UserId { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }

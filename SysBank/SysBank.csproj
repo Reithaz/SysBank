@@ -45,6 +45,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,12 +163,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BLL\Facades\PaymentCardsFcd.cs" />
     <Compile Include="BLL\Facades\UsersFcd.cs" />
+    <Compile Include="BLL\Models\AccountsModel.cs" />
+    <Compile Include="BLL\Models\ATMCardApplication.cs" />
+    <Compile Include="BLL\Models\BaseCardApplicationModel.cs" />
+    <Compile Include="BLL\Models\CreditCardApplication.cs" />
+    <Compile Include="BLL\Models\DebitCardApplication.cs" />
     <Compile Include="BLL\Models\PaymentCardsModel.cs" />
     <Compile Include="BLL\Models\UsersModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PaymentCardsController.cs" />
+    <Compile Include="Controllers\PaymentCardsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\Accounts.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
@@ -217,7 +225,9 @@
     <Compile Include="DAL\C__MigrationHistory.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DAO\PaymentCardsDAO.cs" />
+    <Compile Include="DAL\DAO\PaymentCardsDAO.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DAL\DAO\UsersDAO.cs" />
     <Compile Include="DAL\DebitCard.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
@@ -348,6 +358,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\PaymentCards\Index.cshtml" />
     <Content Include="Views\PaymentCards\CardDetails.cshtml" />
+    <Content Include="Views\PaymentCards\BaseCardApplication.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreditCardApplication.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DebitCardApplication.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ATMCardApplication.cshtml" />
+    <Content Include="Views\PaymentCards\ApplicationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
