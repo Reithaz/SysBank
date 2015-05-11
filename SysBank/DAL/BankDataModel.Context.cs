@@ -47,6 +47,5 @@ namespace SysBank.DAL
         public virtual DbSet<PaymentCardApplication> PaymentCardApplication { get; set; }
         public virtual DbSet<PaymentCards> PaymentCards { get; set; }
         public virtual DbSet<PaymentCardsOperationHistory> PaymentCardsOperationHistory { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

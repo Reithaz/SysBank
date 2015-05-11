@@ -4,7 +4,7 @@
     ViewBag.Title = "Lista wniosków";
 }
 
-<h2>Lista Twoich wniosków o karty płatnicze</h2>
+<h2>Lista wniosków klientów do rozpatrzenia</h2>
 @if (Model.Any()) { 
 <table class="table">
     <tr>
@@ -38,11 +38,21 @@
             @Html.DisplayFor(modelItem => item.Decision)
         </td>
         <td>
-            @Html.ActionLink("Szczegóły wniosku", "ApplicationDetails", new { id=item.Id })
+            @if (item.CardTypeId == 1001) { 
+            @Html.ActionLink("Rozpatruj wniosek", "CreditApplicationAcceptance", new { id=item.Id })}
+            else if (item.CardTypeId == 1002)
+            {
+                @Html.ActionLink("Rozpatruj wniosek", "DebitApplicationAcceptance", new { id = item.Id })
+            }
+            else if (item.CardTypeId == 1003)
+            {
+                @Html.ActionLink("Rozpatruj wniosek", "ATMApplicationAcceptance", new { id = item.Id })
+            }
+                                                                   
         </td>
     </tr>
 }
 </table>
 }else {
-<div>Nie złożyłes jeszcze żadnego wniosku. </div>
+<div>Brak wniosków do akceptacji. </div>
 }

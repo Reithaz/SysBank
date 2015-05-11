@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Strona startowa", "Index", "Home")</li>
-                    @if (Request.IsAuthenticated)
+                    @if (Request.IsAuthenticated && User.IsInRole("User"))
                     {
                         <li>@Html.ActionLink("Lista użytkowników", "Index", "Users")</li>
                         <li class="dropdown">
@@ -36,6 +36,10 @@
 
                             </ul>
                         </li>}
+                            @if (Request.IsAuthenticated && User.IsInRole("Administrator"))
+                            {
+                                <li>@Html.ActionLink("Akceptacja wniosków", "ApplicationAcceptanceList", "PaymentCards")</li>
+                            }
 
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -161,6 +161,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\Facades\DictionaryFcd.cs" />
     <Compile Include="BLL\Facades\PaymentCardsFcd.cs" />
     <Compile Include="BLL\Facades\UsersFcd.cs" />
     <Compile Include="BLL\Models\AccountsModel.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="BLL\Models\BaseCardApplicationModel.cs" />
     <Compile Include="BLL\Models\CreditCardApplication.cs" />
     <Compile Include="BLL\Models\DebitCardApplication.cs" />
+    <Compile Include="BLL\Models\DictionaryItemModel.cs" />
     <Compile Include="BLL\Models\PaymentCardsModel.cs" />
     <Compile Include="BLL\Models\UsersModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="DAL\C__MigrationHistory.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DAO\DictionaryDAO.cs" />
     <Compile Include="DAL\DAO\PaymentCardsDAO.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -260,9 +263,6 @@
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PaymentCardsOperationHistory.cs">
-      <DependentUpon>BankDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\sysdiagrams.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -363,6 +363,10 @@
     <Content Include="Views\Shared\EditorTemplates\DebitCardApplication.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ATMCardApplication.cshtml" />
     <Content Include="Views\PaymentCards\ApplicationList.cshtml" />
+    <Content Include="Views\PaymentCards\ApplicationAcceptanceList.cshtml" />
+    <Content Include="Views\PaymentCards\CreditApplicationAcceptance.cshtml" />
+    <Content Include="Views\PaymentCards\DebitApplicationAcceptance.cshtml" />
+    <Content Include="Views\PaymentCards\ATMApplicationAcceptance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

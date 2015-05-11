@@ -41,5 +41,21 @@ namespace SysBank.BLL.Facades
                 UserId = x.UserId
             }).ToList();
         }
+
+        public AccountsModel GetUserAccountById(int id)
+        {
+            var account = _usersDAO.GetUserAccountById(id);
+
+            return new AccountsModel()
+            {
+                AccountNumber = account.AccountNumber,
+                AvailableBalance = account.AvailableBalance,
+                CurrentBalance = account.CurrentBalance,
+                Interest = account.Interest,
+                Id = account.Id,
+                Provision = account.Provision,
+                UserId = account.UserId
+            };
+        }
     }
 }

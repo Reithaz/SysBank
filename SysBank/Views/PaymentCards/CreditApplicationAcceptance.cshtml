@@ -1,0 +1,51 @@
+﻿@model SysBank.BLL.Models.CreditCardApplication
+
+@{
+    ViewBag.Title = "CreditApplicationAcceptance";
+}
+
+
+
+<div>
+    <h4>Akceptacja wniosku o kartę kredytową</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Limit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsContactless)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsContactless)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    <input type="button" value="Akceptuj" class="btn btn-success" onclick="location.href='@Url.Action("ApplicationAccept", "PaymentCards", new { id = Model.BaseApplicationId })'" />
+    <input type="button" value="Odrzuć" class="btn btn-danger" onclick="location.href='@Url.Action("ApplicationReject", "PaymentCards", new { id = Model.BaseApplicationId })'" />
+</p>

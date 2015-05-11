@@ -30,7 +30,6 @@
         <EntityTypeShape EntityType="SysBankModel.PaymentCardApplication" Width="1.5" PointX="8.25" PointY="8.5" />
         <EntityTypeShape EntityType="SysBankModel.PaymentCards" Width="1.5" PointX="11.25" PointY="5.125" />
         <EntityTypeShape EntityType="SysBankModel.PaymentCardsOperationHistory" Width="1.5" PointX="16.5" PointY="1.75" />
-        <EntityTypeShape EntityType="SysBankModel.sysdiagrams" Width="1.5" PointX="6.375" PointY="12.75" />
         <AssociationConnector Association="SysBankModel.FK_ATMCard_Accounts" />
         <AssociationConnector Association="SysBankModel.FK_ATMCardApplication_Accounts" />
         <AssociationConnector Association="SysBankModel.FK_DebitCard_PaymentCards" />

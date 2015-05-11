@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.CreationDateShort)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeId)
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th></th>
     </tr>
@@ -30,7 +30,7 @@
             @Html.DisplayFor(modelItem => item.CreationDateShort)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TypeId)
+            @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
             @Html.ActionLink("Szczegóły karty", "CardDetails", new { id=item.Id }) 

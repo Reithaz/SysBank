@@ -23,5 +23,10 @@ namespace SysBank.DAL.DAO
         {
             return context.Accounts.Where(x => x.UserId == id).ToList();
         }
+
+        public Accounts GetUserAccountById(int id)
+        {
+            return context.Accounts.Where(x => x.Id == id).Single();
+        }
     }
 }

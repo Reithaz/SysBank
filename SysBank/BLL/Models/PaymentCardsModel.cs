@@ -16,7 +16,9 @@ namespace SysBank.BLL.Models
         public DateTime CreationDate { get; set; }
         [Display(Name="Data utworzenia")]
         public string CreationDateShort { get { return CreationDate.ToShortDateString(); } }
-        [Display(Name="Typ karty")]
+        
         public int TypeId { get; set; }
+        [Display(Name = "Typ karty")]
+        public string Type { get; set; }
     }
 }

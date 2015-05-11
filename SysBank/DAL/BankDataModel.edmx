@@ -266,16 +266,6 @@
           <Property Name="DateIssued" Type="datetime" Nullable="false" />
           <Property Name="BalanceChange" Type="decimal" Precision="18" Scale="3" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="UsersAccounts">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -664,7 +654,6 @@
           <EntitySet Name="PaymentCardApplication" EntityType="Self.PaymentCardApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentCards" EntityType="Self.PaymentCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentCardsOperationHistory" EntityType="Self.PaymentCardsOperationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersAccounts" EntityType="Self.UsersAccounts" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_account" Association="Self.FK_account">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -932,7 +921,6 @@
           <EntitySet Name="PaymentCardApplication" EntityType="SysBankModel.PaymentCardApplication" />
           <EntitySet Name="PaymentCards" EntityType="SysBankModel.PaymentCards" />
           <EntitySet Name="PaymentCardsOperationHistory" EntityType="SysBankModel.PaymentCardsOperationHistory" />
-          <EntitySet Name="sysdiagrams" EntityType="SysBankModel.sysdiagrams" />
           <AssociationSet Name="FK_ATMCard_Accounts" Association="SysBankModel.FK_ATMCard_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="ATMCard" EntitySet="ATMCard" />
@@ -1258,16 +1246,6 @@
           <NavigationProperty Name="DictionaryItems" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" FromRole="PaymentCardsOperationHistory" ToRole="DictionaryItems" />
           <NavigationProperty Name="DictionaryItems1" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" FromRole="PaymentCardsOperationHistory" ToRole="DictionaryItems" />
           <NavigationProperty Name="PaymentCards" Relationship="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards" FromRole="PaymentCardsOperationHistory" ToRole="PaymentCards" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_ATMCard_Accounts">
           <End Type="SysBankModel.Accounts" Role="Accounts" Multiplicity="1" />
@@ -1832,17 +1810,6 @@
                 <ScalarProperty Name="CreditCardId" ColumnName="CreditCardId" />
                 <ScalarProperty Name="OperationTypeId" ColumnName="OperationTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SysBankModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

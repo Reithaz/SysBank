@@ -26,7 +26,7 @@ namespace SysBank.Controllers
         public ActionResult BaseCardApplication()
         {
             List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem() { Text = "-- Wybierz typ karty kredytowej --", Value = "0" });
+            items.Add(new SelectListItem() { Text = "-- Wybierz typ karty płatniczej --", Value = "0" });
             items.Add(new SelectListItem() { Text = "Karta kredytowa", Value = "1001" });
             items.Add(new SelectListItem() { Text = "Karta debetowa", Value = "1002" });
             items.Add(new SelectListItem() { Text = "Karta bankomatowa", Value = "1003" });
@@ -57,12 +57,55 @@ namespace SysBank.Controllers
             model.UserId = User.Identity.GetUserId();
             cardsFcd.CreateApplication(model);
 
-            return Redirect("~/PaymentCards/BaseCardApplication");
+            return Redirect("~/PaymentCards/ApplicationList");
         }
 
         public ActionResult ApplicationList()
         {
-           return View(cardsFcd.GetApplicationsByUserId(User.Identity.GetUserId()));
+            var list = cardsFcd.GetApplicationsByUserId(User.Identity.GetUserId());
+            
+           return View(list);
         }
+
+        public ActionResult ApplicationAcceptanceList()
+        {
+            var list = cardsFcd.GetAllApplications();
+
+            return View(list);
+        }
+        [HttpGet]
+        public ActionResult CreditApplicationAcceptance(int id)
+        {
+            var app = cardsFcd.GetCreditApplication(id);
+
+            return View(app);
+        }
+        [HttpGet]
+        public ActionResult DebitApplicationAcceptance(int id)
+        {
+            var app = cardsFcd.GetDebitApplication(id);
+
+            return View(app);
+        }
+        [HttpGet]
+        public ActionResult ATMApplicationAcceptance(int id)
+        {
+            var app = cardsFcd.GetATMApplication(id);
+
+            return View(app);
+        }
+
+        public ActionResult ApplicationAccept(int id)
+        {
+            cardsFcd.ApplicationAccept(id);
+            return Redirect("~/PaymentCards/ApplicationAcceptanceList");
+
+        }
+        public ActionResult ApplicationReject(int id)
+        {
+            cardsFcd.ApplicationReject(id);
+            return Redirect("~/PaymentCards/ApplicationAcceptanceList");
+        }
+       
     }
 }
