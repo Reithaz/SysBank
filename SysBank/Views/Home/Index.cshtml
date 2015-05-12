@@ -4,6 +4,8 @@
 
 <div class="jumbotron">
     <h2>Witamy w systemie bankowym</h2>
-    <p class="lead"></p>
+    @if (!User.Identity.IsAuthenticated) { 
+    <p class="lead">Aby korzystać z systemu wymagane jest aktywne konto użytkownika. </p>
+    }
 </div>
 
