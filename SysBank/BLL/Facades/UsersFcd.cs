@@ -18,6 +18,24 @@ namespace SysBank.BLL.Facades
             return users.Select(x => new UsersModel() { Id = x.Id, UserName = x.UserName }).ToList();
         }
 
+        public List<AccountsModel> GetAllAccounts()
+        {
+            var accounts = _usersDAO.GetAllAccounts();
+
+            return accounts.Select(x => new AccountsModel()
+            {
+                AccountNumber = x.AccountNumber,
+                AvailableBalance = x.AvailableBalance,
+                BlockedBalance = (decimal)x.BlockedBalance,
+                CurrentBalance = x.CurrentBalance,
+                Id = x.Id,
+                Interest = x.Interest,
+                Provision = x.Provision,
+                UserId = x.UserId
+            }
+            ).ToList();
+        }
+
         public UsersModel GetUserById(string id)
         {
             if (!String.IsNullOrEmpty(id))
@@ -31,7 +49,8 @@ namespace SysBank.BLL.Facades
 
         public List<AccountsModel> GetUserAccountsByUserId(string id)
         {
-            return  _usersDAO.GetUserAccountsByUserId(id).Select(x => new AccountsModel(){
+            return _usersDAO.GetUserAccountsByUserId(id).Select(x => new AccountsModel()
+            {
                 Id = x.Id,
                 Interest = x.Interest,
                 AccountNumber = x.AccountNumber,
@@ -54,8 +73,11 @@ namespace SysBank.BLL.Facades
                 Interest = account.Interest,
                 Id = account.Id,
                 Provision = account.Provision,
-                UserId = account.UserId
+                UserId = account.UserId,
+                BlockedBalance = (decimal)account.BlockedBalance
             };
         }
+
+
     }
 }

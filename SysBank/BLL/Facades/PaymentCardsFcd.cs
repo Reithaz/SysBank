@@ -13,6 +13,7 @@ namespace SysBank.BLL.Facades
     public class PaymentCardsFcd
     {
         PaymentCardsDAO cardsDAO = new PaymentCardsDAO();
+        UsersDAO usersDAO = new UsersDAO();
         DictionaryFcd dictFcd = new DictionaryFcd();
         UsersFcd usersFcd = new UsersFcd();
         public List<PaymentCardsModel> GetAllPaymentCardsForUser(string id)
@@ -50,10 +51,39 @@ namespace SysBank.BLL.Facades
                 UsedLimit = CalculateDailyUsedLimit(id),
                 AvailableBalance = account.AvailableBalance,
                 UserId = baseCard.UserId,
-                BoundAccountNumber = account.AccountNumber
+                BoundAccountNumber = account.AccountNumber,
+                OperationsCount = 5,
+                UsedOperationsCount = GetOperationsCount(id)
+                
             };
 
             return atmCardModel;
+        }
+
+        public DebitCardModel GetDebitCardById(int id)
+        {
+            var debitCard = cardsDAO.GetDebitCardById(id);
+            var baseCard = GetPaymentCardById(id);
+            var account = usersFcd.GetUserAccountById(debitCard.AccountId);
+
+            DebitCardModel debitCardModel = new DebitCardModel()
+            {
+                AccountId = debitCard.AccountId,
+                BaseCardId = debitCard.BaseCardId,
+                MonthlyLimit = debitCard.MonthlyLimit,
+                Id = debitCard.Id,
+                BaseCard = baseCard,
+                UsedMonthlyLimit = CalculateMonthlyUsedLimitDebit(id),
+                AvailableBalance = account.AvailableBalance,
+                UserId = baseCard.UserId,
+                BoundAccountNumber = account.AccountNumber,
+                OperationsCount = 5,
+                UsedOperationsCount = GetOperationsCountDebit(id),
+                BlockedCashAmount = account.BlockedBalance
+
+            };
+
+            return debitCardModel;
         }
 
         public void CreateApplication(BaseCardApplicationModel model)
@@ -247,6 +277,37 @@ namespace SysBank.BLL.Facades
             return limit;
         }
 
+        public decimal CalculateMonthlyUsedLimitDebit(int cardId)
+        {
+            int nowMonth = DateTime.Now.Month;
+            int nowYear = DateTime.Now.Year;
+            decimal limit = 0;
+            var operations = cardsDAO.GetOperationsHistory().Where(x => (x.OperationTypeId == 3003  || x.OperationTypeId == 3004) && x.CreditCardId == cardId && x.DateIssued.Month == nowMonth && x.DateIssued.Year == nowYear).ToList();
+            foreach (var item in operations)
+            {
+                limit += item.BalanceChange * (-1);
+            }
+            return limit;
+        }
+
+        public int GetOperationsCount(int cardId)
+        {
+            var operations = cardsDAO.GetOperationsHistory()
+                .Where(x => x.OperationTypeId == 3002 && x.CreditCardId == cardId && x.DateIssued.ToShortDateString()
+                    .Equals(DateTime.Now.ToShortDateString()))
+                    .ToList();
+            return operations.Count;
+        }
+
+        public int GetOperationsCountDebit(int cardId)
+        {
+            var operations = cardsDAO.GetOperationsHistory()
+                .Where(x => x.OperationTypeId == 3003 && x.CreditCardId == cardId && x.DateIssued.ToShortDateString()
+                    .Equals(DateTime.Now.ToShortDateString()))
+                    .ToList();
+            return operations.Count;
+        }
+
         public void ATMWithdrawMoney(ATMCardModel atmcard)
         {
             using (var ts = new TransactionScope())
@@ -261,6 +322,24 @@ namespace SysBank.BLL.Facades
                     DateIssued = DateTime.Now,
                     OperationTypeId = 3002,
                     UserId = atmcard.UserId
+                });
+                ts.Complete();
+            }
+        }
+
+        public void PayWithDebit(DebitCardModel debitCard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                usersDAO.UpdateAccountBlockedBalance(debitCard.AccountId, debitCard.CashAmount);
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = debitCard.CashAmount * (-1),
+                    CreditCardId = debitCard.Id,
+                    CreditCardTypeId = 1002,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3003,
+                    UserId = debitCard.UserId
                 });
                 ts.Complete();
             }
@@ -298,10 +377,42 @@ namespace SysBank.BLL.Facades
                Id = x.Id,
                OperationType = dictFcd.GetDictionaryItem(x.OperationTypeId).Value,
                OperationTypeId = x.OperationTypeId
-            }).ToList();
+            }).OrderByDescending(x => x.DateIssued).ToList();
 
 
             return list;
+        }
+
+        public void AcceptDebitTransaction(int id)
+        {            
+            using (var ts = new TransactionScope())
+            {
+                var account = usersFcd.GetUserAccountById(id);
+                cardsDAO.WithdrawMoneyFromAccount(account.Id, account.BlockedBalance);
+                cardsDAO.DepositMoneyToAccount((int)Consts.Consts.AccountNumbers.SystemAccountId, account.BlockedBalance);
+                usersDAO.ClearAccountBlockedBalance(account.Id);
+                ts.Complete();
+            }
+        }
+
+        public void RejectDebitTransaction(int id)
+        {
+            using (var ts = new TransactionScope())
+            {
+                var account = usersFcd.GetUserAccountById(id);
+                var ccId = cardsDAO.GetDebitCardForAccount(account.Id).Id;
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = account.BlockedBalance,
+                    CreditCardId = ccId,
+                    CreditCardTypeId = 1002,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3004,
+                    UserId = account.UserId
+                });
+                usersDAO.ClearAccountBlockedBalance(account.Id);
+                ts.Complete();
+            }
         }
     }
 }

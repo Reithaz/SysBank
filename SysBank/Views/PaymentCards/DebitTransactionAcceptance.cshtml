@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SysBank.BLL.Models.AccountsModel>
+
+@{
+    ViewBag.Title = "DebitTransactionAcceptance";
+}
+
+<h4>Akceptacja transakcji kart debetowych</h4>
+
+
+@if (Model.Any()) {
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlockedBalance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableBalance) zł
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlockedBalance) zł
+        </td>
+        <td>
+            @Html.ActionLink("Akceptuj", "AcceptDebitTransaction", new { id=item.Id }) |
+            @Html.ActionLink("Cofnij", "RejectDebitTransaction", new { id=item.Id }) 
+        </td>
+    </tr>
+}
+
+</table>}
+else { <div>Brak transakcji do akceptacji</div>}

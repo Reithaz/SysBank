@@ -17,6 +17,11 @@ namespace SysBank.DAL.DAO
             return context.PaymentCards.Where(x => x.UserId == id).ToList();
         }
 
+        public DebitCard GetDebitCardForAccount(int id)
+        {
+            return context.DebitCard.Where(x => x.AccountId == id).SingleOrDefault();
+        }
+
         public PaymentCards GetPaymentCardById(int id)
         {
             return context.PaymentCards.Where(x => x.Id == id).Single();

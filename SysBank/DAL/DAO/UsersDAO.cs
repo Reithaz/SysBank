@@ -14,6 +14,11 @@ namespace SysBank.DAL.DAO
             return context.AspNetUsers.ToList();
         }
 
+        public List<Accounts> GetAllAccounts()
+        {
+            return context.Accounts.ToList();
+        }
+
         public AspNetUsers GetUserById(string id)
         {
             return context.AspNetUsers.Where(x => x.Id == id).SingleOrDefault();
@@ -27,6 +32,24 @@ namespace SysBank.DAL.DAO
         public Accounts GetUserAccountById(int id)
         {
             return context.Accounts.Where(x => x.Id == id).Single();
+        }
+
+        public void UpdateAccountBlockedBalance(int id, decimal blockedBalance)
+        {
+            var account = GetUserAccountById(id);
+            account.BlockedBalance += blockedBalance;
+            context.Entry(account).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+
+        }
+
+        public void ClearAccountBlockedBalance(int id)
+        {
+            var account = GetUserAccountById(id);
+            account.BlockedBalance = 0;
+            context.Entry(account).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+
         }
     }
 }

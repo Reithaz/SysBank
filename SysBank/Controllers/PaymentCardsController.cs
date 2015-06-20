@@ -114,9 +114,11 @@ namespace SysBank.Controllers
             return View();
         }
 
-        public ActionResult DebitCardSim(int id)
+        public ActionResult DebitCardSim(int id, string errorDetails)
         {
-            return View();
+            var cardModel = cardsFcd.GetDebitCardById(id);
+            cardModel.ErrorDetails = errorDetails;
+            return View(cardModel);
         }
 
         public ActionResult ATMCardSim(int id, string errorDetails)
@@ -125,6 +127,38 @@ namespace SysBank.Controllers
             cardModel.ErrorDetails = errorDetails;
             return View(cardModel);
         }
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult PayWithDebit(DebitCardModel debitCard) 
+        {
+            debitCard.ErrorDetails = "";
+            if (debitCard.CashAmount <= 0) { debitCard.ErrorDetails = "Podana kwota musi być większa od zera"; }
+            else
+            {
+                if (debitCard.CashAmount > debitCard.AvailableBalance - debitCard.BlockedCashAmount)
+                {
+                    debitCard.ErrorDetails += "Podana kwota przekracza sumę salda dostępnego i kwoty zablokowanej. ";
+                }
+                else
+                {
+                    if (debitCard.CashAmount > debitCard.MonthlyLimit - debitCard.UsedMonthlyLimit)
+                    {
+                        debitCard.ErrorDetails += "Przekroczono miesięczny limit pieniężny.";
+                    }
+                    else
+                    {
+                        if (debitCard.UsedOperationsCount >= debitCard.OperationsCount)
+                        {
+                            debitCard.ErrorDetails += "Przekroczono dzienny limit ilości operacji";
+                        }
+                        else cardsFcd.PayWithDebit(debitCard);
+                    }
+                }
+            }
+
+            return RedirectToAction("DebitCardSim", new { id = debitCard.Id, errorDetails = debitCard.ErrorDetails });      
+        }
+
         [HttpPost]
         [HttpParamAction]
         public ActionResult ATMWithdrawMoney(ATMCardModel atmcard){
@@ -140,11 +174,14 @@ namespace SysBank.Controllers
                 {
                     if (atmcard.CashAmount > atmcard.DailyLimit - atmcard.UsedLimit)
                     {
-                        atmcard.ErrorDetails += "Przekroczono dzienny limit.";
+                        atmcard.ErrorDetails += "Przekroczono dzienny limit pieniężny.";
                     }
                     else
                     {
-                        cardsFcd.ATMWithdrawMoney(atmcard);
+                        if (atmcard.UsedOperationsCount >= atmcard.OperationsCount)
+                        {
+                            atmcard.ErrorDetails += "Przekroczono dzienny limit ilości operacji";
+                        }else  cardsFcd.ATMWithdrawMoney(atmcard);
                     }
                 }
             }
@@ -165,6 +202,24 @@ namespace SysBank.Controllers
         public ActionResult PaymentCardsOperationHistory()
         {
             return View(cardsFcd.GetPaymentCardsOperationHistory(User.Identity.GetUserId()));
+        }
+
+        [HttpGet]
+        public ActionResult DebitTransactionAcceptance()
+        {
+            return View(usersFcd.GetAllAccounts().Where(x => x.BlockedBalance > 0));
+        }
+
+        public ActionResult AcceptDebitTransaction(int id)
+        {
+            cardsFcd.AcceptDebitTransaction(id);
+            return Redirect("~/PaymentCards/DebitTransactionAcceptance");
+        }
+
+        public ActionResult RejectDebitTransaction(int id)
+        {
+            cardsFcd.RejectDebitTransaction(id);
+            return Redirect("~/PaymentCards/DebitTransactionAcceptance");
         }
     }
 

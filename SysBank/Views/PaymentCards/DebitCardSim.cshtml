@@ -1,0 +1,117 @@
+﻿@model SysBank.BLL.Models.DebitCardModel
+
+@{
+    ViewBag.Title = "DebitCardSim";
+}
+
+<div>
+    <h4>Symulacja dla karty debetowej</h4>
+    <hr />
+    @using (@Html.BeginForm()){
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseCard.CardNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BaseCard.CardNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MonthlyLimit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MonthlyLimit)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UsedMonthlyLimit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UsedMonthlyLimit)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OperationsCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OperationsCount)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UsedOperationsCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UsedOperationsCount)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseCard.CreationDateShort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BaseCard.CreationDateShort)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseCard.ExpirationDateShort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BaseCard.ExpirationDateShort)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseCard.IsBlockedString)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BaseCard.IsBlockedString)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BoundAccountNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BoundAccountNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AvailableBalance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AvailableBalance)
+            </dd>
+            <font color="red">@Html.DisplayFor(x => x.ErrorDetails)</font>
+            <br />
+            @Html.DisplayNameFor(model => model.CashAmount)
+            @Html.TextBoxFor(model => model.CashAmount)
+
+        </dl>
+
+        @Html.HiddenFor(x => x.AccountId)
+        @Html.HiddenFor(x => x.AvailableBalance)
+        @Html.HiddenFor(x => x.BaseCard)
+        @Html.HiddenFor(x => x.BaseCard.CardNumber)
+        @Html.HiddenFor(x => x.BaseCard.CreationDate)
+        @Html.HiddenFor(x => x.BaseCard.CreationDateShort)
+        @Html.HiddenFor(x => x.BaseCard.ExpirationDate)
+        @Html.HiddenFor(x => x.BaseCard.ExpirationDateShort)
+        @Html.HiddenFor(x => x.BaseCard.IsBlocked)
+        @Html.HiddenFor(x => x.BaseCard.Id)
+        @Html.HiddenFor(x => x.BaseCard.IsBlockedString)
+        @Html.HiddenFor(x => x.BaseCard.Type)
+        @Html.HiddenFor(x => x.BaseCard.TypeId)
+        @Html.HiddenFor(x => x.BaseCardId)
+        @Html.HiddenFor(x => x.BoundAccountNumber)
+        @Html.HiddenFor(x => x.MonthlyLimit)
+        @Html.HiddenFor(x => x.ErrorDetails)
+        @Html.HiddenFor(x => x.UsedMonthlyLimit)
+        @Html.HiddenFor(x => x.UserId)
+        @Html.HiddenFor(x => x.OperationsCount)
+        @Html.HiddenFor(x => x.UsedOperationsCount)
+        @Html.HiddenFor(x => x.BlockedCashAmount)
+    <input type="submit" name="PayWithDebit" value="Zapłać" />}
+    </div>
+<p>
+    @Html.ActionLink("Powrót do listy kart", "Index")
+</p>

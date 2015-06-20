@@ -16,6 +16,7 @@
           <Property Name="AvailableBalance" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Interest" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BlockedBalance" Type="decimal" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -937,6 +938,7 @@
           <NavigationProperty Name="DebitCardApplication" Relationship="SysBankModel.FK_DebitCardApplication_Accounts" FromRole="Accounts" ToRole="DebitCardApplication" />
           <NavigationProperty Name="Deposites" Relationship="SysBankModel.FK_Deposites_Accounts" FromRole="Accounts" ToRole="Deposites" />
           <NavigationProperty Name="AspNetUsers" Relationship="SysBankModel.UsersAccounts" FromRole="Accounts" ToRole="AspNetUsers" />
+          <Property Name="BlockedBalance" Type="Decimal" Precision="18" Scale="3" />
         </EntityType>
         <EntityType Name="ATMCard">
           <Key>
@@ -1449,6 +1451,7 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="SysBankModel.Accounts">
               <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="BlockedBalance" ColumnName="BlockedBalance" />
                 <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
                 <ScalarProperty Name="Interest" ColumnName="Interest" />
                 <ScalarProperty Name="AvailableBalance" ColumnName="AvailableBalance" />
