@@ -166,12 +166,15 @@
     <Compile Include="BLL\Facades\UsersFcd.cs" />
     <Compile Include="BLL\Models\AccountsModel.cs" />
     <Compile Include="BLL\Models\ATMCardApplication.cs" />
+    <Compile Include="BLL\Models\ATMCardModel.cs" />
     <Compile Include="BLL\Models\BaseCardApplicationModel.cs" />
     <Compile Include="BLL\Models\CreditCardApplication.cs" />
     <Compile Include="BLL\Models\DebitCardApplication.cs" />
     <Compile Include="BLL\Models\DictionaryItemModel.cs" />
+    <Compile Include="BLL\Models\PaymentCardOperationHistoryModel.cs" />
     <Compile Include="BLL\Models\PaymentCardsModel.cs" />
     <Compile Include="BLL\Models\UsersModel.cs" />
+    <Compile Include="Consts\Consts.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -180,9 +183,6 @@
     </Compile>
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\Accounts.cs">
-      <DependentUpon>BankDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Application_Document.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\AspNetRoles.cs">
@@ -224,9 +224,6 @@
     <Compile Include="DAL\CreditCardApplication.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\C__MigrationHistory.cs">
-      <DependentUpon>BankDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\DAO\DictionaryDAO.cs" />
     <Compile Include="DAL\DAO\PaymentCardsDAO.cs">
       <SubType>Code</SubType>
@@ -248,12 +245,6 @@
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DictionaryItems.cs">
-      <DependentUpon>BankDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Insurance.cs">
-      <DependentUpon>BankDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\Insurance_Type.cs">
       <DependentUpon>BankDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\PaymentCardApplication.cs">
@@ -367,6 +358,9 @@
     <Content Include="Views\PaymentCards\CreditApplicationAcceptance.cshtml" />
     <Content Include="Views\PaymentCards\DebitApplicationAcceptance.cshtml" />
     <Content Include="Views\PaymentCards\ATMApplicationAcceptance.cshtml" />
+    <Content Include="Views\PaymentCards\ATMCardSim.cshtml" />
+    <Content Include="Views\PaymentCards\TestView.cshtml" />
+    <Content Include="Views\PaymentCards\PaymentCardsOperationHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

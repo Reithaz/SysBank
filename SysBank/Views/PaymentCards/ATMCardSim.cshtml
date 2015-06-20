@@ -1,0 +1,103 @@
+﻿@model SysBank.BLL.Models.ATMCardModel
+
+@{
+    ViewBag.Title = "ATMCardSim";
+}
+
+<div>
+    <h4>Symulacja dla karty bankomatowej</h4>
+    <hr />
+@using (@Html.BeginForm())
+{
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseCard.CardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseCard.CardNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DailyLimit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DailyLimit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsedLimit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsedLimit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseCard.CreationDateShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseCard.CreationDateShort)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseCard.ExpirationDateShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseCard.ExpirationDateShort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseCard.IsBlockedString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseCard.IsBlockedString)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BoundAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoundAccountNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableBalance)
+        </dd>
+        <font color="red">@Html.DisplayFor(x => x.ErrorDetails)</font><br />
+        @Html.DisplayNameFor(model => model.CashAmount)
+        @Html.TextBoxFor(model => model.CashAmount)
+    
+    </dl>
+    
+    @Html.HiddenFor(x => x.AccountId)
+    @Html.HiddenFor(x => x.AvailableBalance)
+    @Html.HiddenFor(x => x.BaseCard)
+    @Html.HiddenFor(x => x.BaseCard.CardNumber)
+    @Html.HiddenFor(x => x.BaseCard.CreationDate)
+    @Html.HiddenFor(x => x.BaseCard.CreationDateShort)
+    @Html.HiddenFor(x => x.BaseCard.ExpirationDate)
+    @Html.HiddenFor(x => x.BaseCard.ExpirationDateShort)
+    @Html.HiddenFor(x => x.BaseCard.IsBlocked)
+    @Html.HiddenFor(x => x.BaseCard.Id)
+    @Html.HiddenFor(x => x.BaseCard.IsBlockedString)
+    @Html.HiddenFor(x => x.BaseCard.Type)
+    @Html.HiddenFor(x => x.BaseCard.TypeId)
+    @Html.HiddenFor(x => x.BaseCardId)
+    @Html.HiddenFor(x => x.BoundAccountNumber)
+    @Html.HiddenFor(x => x.DailyLimit)
+    @Html.HiddenFor(x => x.ErrorDetails)
+    @Html.HiddenFor(x => x.UsedLimit)
+    @Html.HiddenFor(x => x.UserId)
+    <input type="submit" name="ATMWithdrawMoney" value="Wypłać pieniądze" />
+    <input type="submit" name="ATMDepositMoney" value="Wpłać pieniądze" />}
+</div>
+
+
+<p>
+    @Html.ActionLink("Powrót do listy kart", "Index")
+</p>

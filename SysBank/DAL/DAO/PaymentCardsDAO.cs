@@ -22,6 +22,21 @@ namespace SysBank.DAL.DAO
             return context.PaymentCards.Where(x => x.Id == id).Single();
         }
 
+        public ATMCard GetATMCardById(int id)
+        {
+            return context.ATMCard.Where(x => x.BaseCardId == id).Single();
+        }
+
+        public CreditCard GetCreditCardById(int id)
+        {
+            return context.CreditCard.Where(x => x.BaseCardId == id).Single();
+        }
+
+        public DebitCard GetDebitCardById(int id)
+        {
+            return context.DebitCard.Where(x => x.BaseCardId == id).Single();
+        }
+
         public int CreateBaseApplication(BaseCardApplicationModel model)
         {
             PaymentCardApplication application = new PaymentCardApplication()
@@ -198,6 +213,34 @@ namespace SysBank.DAL.DAO
             var item = context.PaymentCardApplication.Where(x => x.Id == id).Single();
             item.DecisionId = 2002;
             item.DecisionDate = DateTime.Now;
+            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public List<PaymentCardsOperationHistory> GetOperationsHistory()
+        {
+            return context.PaymentCardsOperationHistory.ToList();
+        }
+        public void CreateOperationHistory(PaymentCardsOperationHistory model)
+        {
+            context.Entry(model).State = System.Data.Entity.EntityState.Added;
+            context.SaveChanges();
+        }
+
+        public void WithdrawMoneyFromAccount(int id, decimal cashAmount)
+        {
+            var item = context.Accounts.Where(x => x.Id == id).Single();
+            item.CurrentBalance -= cashAmount;
+            item.AvailableBalance -= cashAmount;
+            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void DepositMoneyToAccount(int id, decimal cashAmount)
+        {
+            var item = context.Accounts.Where(x => x.Id == id).Single();
+            item.CurrentBalance += cashAmount;
+            item.AvailableBalance += cashAmount;
             context.Entry(item).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }

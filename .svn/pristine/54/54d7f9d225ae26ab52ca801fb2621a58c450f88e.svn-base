@@ -12,20 +12,16 @@ namespace SysBank.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Application_Document
+    public partial class AspNetRoles
     {
-        public Application_Document()
+        public AspNetRoles()
         {
-            this.Insurance = new HashSet<Insurance>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int Id { get; set; }
-        public string Status { get; set; }
-        public string Path { get; set; }
-        public string File_Name { get; set; }
-        public System.DateTime Application_Date { get; set; }
-        public string Description { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
-        public virtual ICollection<Insurance> Insurance { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

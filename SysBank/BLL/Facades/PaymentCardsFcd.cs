@@ -31,7 +31,29 @@ namespace SysBank.BLL.Facades
         public PaymentCardsModel GetPaymentCardById(int id)
         {
             var card = cardsDAO.GetPaymentCardById(id);
-            return new PaymentCardsModel() { CreationDate = card.CreationDate, Id = card.Id, IsBlocked = card.IsBlocked, TypeId = card.TypeId };
+            return new PaymentCardsModel() { UserId = card.UserId, CreationDate = card.CreationDate, Id = card.Id, IsBlocked = card.IsBlocked, TypeId = card.TypeId, CardNumber = card.CardNumber, ExpirationDate = card.ExpirationDate };
+        }
+
+        public ATMCardModel GetATMCardById(int id)
+        {           
+            var atmCard = cardsDAO.GetATMCardById(id);            
+            var baseCard = GetPaymentCardById(id);
+            var account = usersFcd.GetUserAccountById(atmCard.AccountId);
+
+            ATMCardModel atmCardModel = new ATMCardModel()
+            {
+                AccountId = atmCard.AccountId,
+                BaseCardId = atmCard.BaseCardId,
+                DailyLimit = atmCard.DailyLimit,
+                Id = atmCard.Id,
+                BaseCard = baseCard,
+                UsedLimit = CalculateDailyUsedLimit(id),
+                AvailableBalance = account.AvailableBalance,
+                UserId = baseCard.UserId,
+                BoundAccountNumber = account.AccountNumber
+            };
+
+            return atmCardModel;
         }
 
         public void CreateApplication(BaseCardApplicationModel model)
@@ -211,6 +233,75 @@ namespace SysBank.BLL.Facades
         public void ApplicationReject(int id)
         {
             cardsDAO.ApplicationReject(id);
+        }
+
+        public decimal CalculateDailyUsedLimit(int cardId)
+        {
+            string today = DateTime.Now.ToShortDateString();
+            decimal limit = 0;
+            var operations = cardsDAO.GetOperationsHistory().Where(x => x.OperationTypeId == 3002 && x.CreditCardId == cardId && x.DateIssued.ToShortDateString().Equals(today)).ToList();
+            foreach (var item in operations)
+            {
+                limit += item.BalanceChange*(-1);
+            }
+            return limit;
+        }
+
+        public void ATMWithdrawMoney(ATMCardModel atmcard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                cardsDAO.WithdrawMoneyFromAccount(atmcard.AccountId, atmcard.CashAmount);
+                cardsDAO.DepositMoneyToAccount((int)Consts.Consts.AccountNumbers.SystemAccountId, atmcard.CashAmount);
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = atmcard.CashAmount * (-1),
+                    CreditCardId = atmcard.Id,
+                    CreditCardTypeId = 1003,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3002,
+                    UserId = atmcard.UserId
+                });
+                ts.Complete();
+            }
+        }
+
+        public void ATMDepositMoney(ATMCardModel atmcard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                cardsDAO.DepositMoneyToAccount(atmcard.AccountId, atmcard.CashAmount);
+                cardsDAO.WithdrawMoneyFromAccount((int)Consts.Consts.AccountNumbers.SystemAccountId, atmcard.CashAmount);
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = atmcard.CashAmount,
+                    CreditCardId = atmcard.Id,
+                    CreditCardTypeId = 1003,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3001,
+                    UserId = atmcard.UserId
+                });
+                ts.Complete();
+            }
+        }
+
+        public List<PaymentCardOperationHistoryModel> GetPaymentCardsOperationHistory(string userId)
+        {
+            var list = cardsDAO.GetOperationsHistory().Where(x => x.UserId == userId).Select(x => new PaymentCardOperationHistoryModel()
+            {
+               AccountNumber = "",
+               BalanceChange = x.BalanceChange,
+               CreditCardId = x.CreditCardId,
+               CreditCardType = dictFcd.GetDictionaryItem(x.CreditCardTypeId).Value,
+               CreditCardTypeId = x.CreditCardTypeId,
+               DateIssued = x.DateIssued,
+               Id = x.Id,
+               OperationType = dictFcd.GetDictionaryItem(x.OperationTypeId).Value,
+               OperationTypeId = x.OperationTypeId
+            }).ToList();
+
+
+            return list;
         }
     }
 }

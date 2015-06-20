@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using SysBank.BLL.Models;
+using System.Reflection;
 namespace SysBank.Controllers
 {
     public class PaymentCardsController : Controller
@@ -106,6 +107,78 @@ namespace SysBank.Controllers
             cardsFcd.ApplicationReject(id);
             return Redirect("~/PaymentCards/ApplicationAcceptanceList");
         }
-       
+
+
+        public ActionResult CreditCardSim(int id)
+        {
+            return View();
+        }
+
+        public ActionResult DebitCardSim(int id)
+        {
+            return View();
+        }
+
+        public ActionResult ATMCardSim(int id, string errorDetails)
+        {
+            var cardModel = cardsFcd.GetATMCardById(id);
+            cardModel.ErrorDetails = errorDetails;
+            return View(cardModel);
+        }
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult ATMWithdrawMoney(ATMCardModel atmcard){
+            atmcard.ErrorDetails = "";
+            if (atmcard.CashAmount <= 0) { atmcard.ErrorDetails = "Podana kwota musi być większa od zera"; }
+            else
+            {
+                if (atmcard.CashAmount > atmcard.AvailableBalance)
+                {
+                    atmcard.ErrorDetails += "Brak wystarczających środków na koncie. ";
+                }
+                else
+                {
+                    if (atmcard.CashAmount > atmcard.DailyLimit - atmcard.UsedLimit)
+                    {
+                        atmcard.ErrorDetails += "Przekroczono dzienny limit.";
+                    }
+                    else
+                    {
+                        cardsFcd.ATMWithdrawMoney(atmcard);
+                    }
+                }
+            }
+            return RedirectToAction("ATMCardSim", new { id = atmcard.Id, errorDetails = atmcard.ErrorDetails });
+        }
+
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult ATMDepositMoney(ATMCardModel atmcard)
+        {
+            atmcard.ErrorDetails = "";
+            if (atmcard.CashAmount <= 0) { atmcard.ErrorDetails = "Podana kwota musi być większa od zera"; }
+            else cardsFcd.ATMDepositMoney(atmcard);
+            return RedirectToAction("ATMCardSim", new { id = atmcard.Id, errorDetails = atmcard.ErrorDetails});
+        }
+
+        [HttpGet]
+        public ActionResult PaymentCardsOperationHistory()
+        {
+            return View(cardsFcd.GetPaymentCardsOperationHistory(User.Identity.GetUserId()));
+        }
     }
+
+    #region attributes
+    public class HttpParamActionAttribute : ActionNameSelectorAttribute
+    {
+        public override bool IsValidName(ControllerContext controllerContext, string actionName, MethodInfo methodInfo)
+        {
+            if (actionName.Equals(methodInfo.Name, StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            var request = controllerContext.RequestContext.HttpContext.Request;
+            return request[methodInfo.Name] != null;
+        }
+    }
+    #endregion
 }

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3d7bc982813e41c284451214c4e9741a" Name="Diagram1">
-        <EntityTypeShape EntityType="SysBankModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SysBankModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SysBankModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SysBankModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
@@ -14,7 +13,6 @@
         <AssociationConnector Association="SysBankModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SysBankModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SysBankModel.Accounts" Width="1.5" PointX="0.75" PointY="5.375" />
-        <EntityTypeShape EntityType="SysBankModel.Application_Document" Width="1.5" PointX="13.375" PointY="13.375" />
         <EntityTypeShape EntityType="SysBankModel.ATMCard" Width="1.5" PointX="13.5" PointY="6" />
         <EntityTypeShape EntityType="SysBankModel.ATMCardApplication" Width="1.5" PointX="13.5" PointY="9.5" />
         <EntityTypeShape EntityType="SysBankModel.CreditCard" Width="1.5" PointX="13.5" PointY="1.5" />
@@ -25,8 +23,6 @@
         <EntityTypeShape EntityType="SysBankModel.DepositType" Width="1.5" PointX="3.75" PointY="12.375" />
         <EntityTypeShape EntityType="SysBankModel.Dictionaries" Width="1.5" PointX="6.75" PointY="18.375" />
         <EntityTypeShape EntityType="SysBankModel.DictionaryItems" Width="1.5" PointX="9" PointY="17.75" />
-        <EntityTypeShape EntityType="SysBankModel.Insurance" Width="1.5" PointX="15.625" PointY="13" />
-        <EntityTypeShape EntityType="SysBankModel.Insurance_Type" Width="1.5" PointX="13.375" PointY="16.625" />
         <EntityTypeShape EntityType="SysBankModel.PaymentCardApplication" Width="1.5" PointX="8.25" PointY="8.5" />
         <EntityTypeShape EntityType="SysBankModel.PaymentCards" Width="1.5" PointX="11.25" PointY="5.125" />
         <EntityTypeShape EntityType="SysBankModel.PaymentCardsOperationHistory" Width="1.5" PointX="16.5" PointY="1.75" />
@@ -35,7 +31,6 @@
         <AssociationConnector Association="SysBankModel.FK_DebitCard_PaymentCards" />
         <AssociationConnector Association="SysBankModel.FK_DebitCardApplication_Accounts" />
         <AssociationConnector Association="SysBankModel.FK_Deposites_Accounts" />
-        <AssociationConnector Association="SysBankModel.FK_Insurance_Application_Document" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardApplication_AspNetUsers" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCards_AspNetUsers" />
         <AssociationConnector Association="SysBankModel.FK_ATMCard_PaymentCards" />
@@ -50,7 +45,6 @@
         <AssociationConnector Association="SysBankModel.FK_PaymentCards_DictionaryItems" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_DictionaryItems1" />
-        <AssociationConnector Association="SysBankModel.FK_Insurance_Insurance_Type" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardsOperationHistory_PaymentCards" />
         <AssociationConnector Association="SysBankModel.UsersAccounts" />
         <AssociationConnector Association="SysBankModel.FK_PaymentCardApplication_DictionaryItems1" />

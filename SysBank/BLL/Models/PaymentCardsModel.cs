@@ -16,9 +16,15 @@ namespace SysBank.BLL.Models
         public DateTime CreationDate { get; set; }
         [Display(Name="Data utworzenia")]
         public string CreationDateShort { get { return CreationDate.ToShortDateString(); } }
-        
+        public DateTime ExpirationDate { get; set; }
+        [Display(Name = "Data wygaśnięcia")]
+        public string ExpirationDateShort { get { return ExpirationDate.ToShortDateString(); } }
+        [Display(Name = "Numer karty")]
+        public string CardNumber { get; set; }
         public int TypeId { get; set; }
         [Display(Name = "Typ karty")]
         public string Type { get; set; }
+        public string UserId { get; set; }
+        
     }
 }

@@ -33,7 +33,18 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.ActionLink("Szczegóły karty", "CardDetails", new { id=item.Id }) 
+            @if (item.TypeId == 1001) { 
+            @Html.ActionLink("Symulacja", "CreditCardSim", new { id=item.Id }) 
+            }
+            else if (item.TypeId == 1002)
+            {
+                @Html.ActionLink("Symulacja", "DebitCardSim", new { id = item.Id })
+            }
+            else if (item.TypeId == 1003)
+            {
+                @Html.ActionLink("Symulacja", "ATMCardSim", new { id = item.Id })
+            }
+            
         </td>
     </tr>
 }
