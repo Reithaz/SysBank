@@ -108,12 +108,6 @@ namespace SysBank.Controllers
             return Redirect("~/PaymentCards/ApplicationAcceptanceList");
         }
 
-
-        public ActionResult CreditCardSim(int id)
-        {
-            return View();
-        }
-
         public ActionResult DebitCardSim(int id, string errorDetails)
         {
             var cardModel = cardsFcd.GetDebitCardById(id);
@@ -125,6 +119,21 @@ namespace SysBank.Controllers
         {
             var cardModel = cardsFcd.GetATMCardById(id);
             cardModel.ErrorDetails = errorDetails;
+            return View(cardModel);
+        }
+
+        public ActionResult CreditCardSim(int id, string errorDetails)
+        {
+            var cardModel = cardsFcd.GetCreditCardById(id);
+            cardModel.ErrorDetails = errorDetails;
+            List<SelectListItem> accounts = new List<SelectListItem>();
+            accounts = usersFcd.GetUserAccountsByUserId(User.Identity.GetUserId()).Select(
+                x => new SelectListItem()
+                {
+                    Text = String.Format("{0} (Dostępne środki: {1} zł)", x.AccountNumber, (x.AvailableBalance - x.BlockedBalance).ToString().Remove((x.AvailableBalance - x.BlockedBalance).ToString().Length - 1)),
+                    Value = x.Id.ToString()
+                }).ToList();
+            cardModel.Accounts = accounts;
             return View(cardModel);
         }
         [HttpPost]
@@ -220,6 +229,57 @@ namespace SysBank.Controllers
         {
             cardsFcd.RejectDebitTransaction(id);
             return Redirect("~/PaymentCards/DebitTransactionAcceptance");
+        }
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult PayWithCreditCard(CreditCardModel creditCard)
+        {
+            creditCard.ErrorDetails = "";
+            if (creditCard.CashAmount <= 0) { creditCard.ErrorDetails = "Podana kwota musi być większa od zera"; }
+            else
+            {
+                if (creditCard.CashAmount > (creditCard.Limit - creditCard.Debit)) { creditCard.ErrorDetails = "Przekroczono limit zadłużenia"; }
+                else
+                {
+                    cardsFcd.PayWithCreditCard(creditCard);
+                }
+            }
+            return RedirectToAction("CreditCardSim", new { id = creditCard.Id, errorDetails = creditCard.ErrorDetails });
+        }
+
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult PayDebtCreditCard(CreditCardModel creditCard)
+        {
+            creditCard.ErrorDetails = "";
+            if (creditCard.AccountId == 0) { creditCard.ErrorDetails = "Nie wybrano rachunku obciążanego"; }
+            else
+            {
+                var account = usersFcd.GetUserAccountById(creditCard.AccountId);
+                if (creditCard.CashAmount <= 0) { creditCard.ErrorDetails = "Podana kwota musi być większa od zera"; }
+                else
+                {
+                    if (creditCard.CashAmount < creditCard.MinimalRepayment) { creditCard.ErrorDetails = "Podana kwota jest mniejsza od minimalnej kwoty spłaty"; }
+                    else
+                    {
+                        if (creditCard.CashAmount > (account.AvailableBalance - account.BlockedBalance)) { creditCard.ErrorDetails = "Brak wystarczających środków na wybranym rachunku"; }
+                        else{
+                            if (creditCard.CashAmount > (creditCard.Debit + creditCard.Provision)) { creditCard.ErrorDetails = "Podana kwota spłaty przekracza zadłużenie i/lub wartość odsetek"; }
+                            else { cardsFcd.PayDebtCreditCard(creditCard); }
+                        }
+                                               
+                    }
+                }
+            }
+            return RedirectToAction("CreditCardSim", new { id = creditCard.Id, errorDetails = creditCard.ErrorDetails });
+        }
+        [HttpPost]
+        [HttpParamAction]
+        public ActionResult NextGracePeriod(CreditCardModel creditCard)
+        {
+            creditCard.ErrorDetails = "";
+            cardsFcd.NextGracePeriod(creditCard);
+            return RedirectToAction("CreditCardSim", new { id = creditCard.Id, errorDetails = creditCard.ErrorDetails });
         }
     }
 

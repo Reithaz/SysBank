@@ -249,7 +249,14 @@ namespace SysBank.DAL.DAO
             context.Entry(item).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
-
+        public void UpdateCreditCard(CreditCardModel model)
+        {
+            var card = GetCreditCardById(model.BaseCardId);
+            card.Debit = model.Debit;
+            card.Provision = model.Provision;
+            context.Entry(card).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+        }
 
         #region helpers
         private static string CreateFakeCreditCardNumber(string prefix, int length)

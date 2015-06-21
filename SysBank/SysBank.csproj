@@ -169,6 +169,9 @@
     <Compile Include="BLL\Models\ATMCardModel.cs" />
     <Compile Include="BLL\Models\BaseCardApplicationModel.cs" />
     <Compile Include="BLL\Models\CreditCardApplication.cs" />
+    <Compile Include="BLL\Models\CreditCardModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BLL\Models\DebitCardApplication.cs" />
     <Compile Include="BLL\Models\DebitCardModel.cs" />
     <Compile Include="BLL\Models\DictionaryItemModel.cs" />
@@ -364,6 +367,7 @@
     <Content Include="Views\PaymentCards\PaymentCardsOperationHistory.cshtml" />
     <Content Include="Views\PaymentCards\DebitCardSim.cshtml" />
     <Content Include="Views\PaymentCards\DebitTransactionAcceptance.cshtml" />
+    <Content Include="Views\PaymentCards\CreditCardSim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -57,7 +57,8 @@ namespace SysBank.BLL.Facades
                 AvailableBalance = x.AvailableBalance,
                 CurrentBalance = x.CurrentBalance,
                 Provision = x.Provision,
-                UserId = x.UserId
+                UserId = x.UserId,
+                BlockedBalance = (decimal)x.BlockedBalance
             }).ToList();
         }
 

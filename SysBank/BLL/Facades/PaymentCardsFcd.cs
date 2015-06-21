@@ -7,6 +7,7 @@ using SysBank.DAL.DAO;
 using SysBank.BLL.Models;
 using System.Transactions;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 namespace SysBank.BLL.Facades
 {
 
@@ -84,6 +85,30 @@ namespace SysBank.BLL.Facades
             };
 
             return debitCardModel;
+        }
+
+        public CreditCardModel GetCreditCardById(int id)
+        {
+            var creditCard = cardsDAO.GetCreditCardById(id);
+            var baseCard = GetPaymentCardById(id);
+
+            CreditCardModel creditCardModel = new CreditCardModel()
+            {
+                BaseCardId = creditCard.BaseCardId,
+                Limit = creditCard.Limit,
+                Id = creditCard.Id,
+                BaseCard = baseCard,
+                UserId = baseCard.UserId,
+                Debit = creditCard.Debit,
+                GracePeriod = creditCard.GracePeriod,
+                GracePeriodCount = creditCard.GracePeriodCount,
+                InterestRate = creditCard.InterestRate,
+                IsContactless = creditCard.IsContactless,
+                MinimalRepayment = creditCard.MinimalRepayment,
+                Provision = creditCard.Provision
+            };
+
+            return creditCardModel;
         }
 
         public void CreateApplication(BaseCardApplicationModel model)
@@ -411,6 +436,77 @@ namespace SysBank.BLL.Facades
                     UserId = account.UserId
                 });
                 usersDAO.ClearAccountBlockedBalance(account.Id);
+                ts.Complete();
+            }
+        }
+
+        public void PayWithCreditCard(CreditCardModel creditCard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                var account = usersFcd.GetUserAccountById(creditCard.AccountId);
+                creditCard.Debit = creditCard.Debit + creditCard.CashAmount;
+                cardsDAO.UpdateCreditCard(creditCard);
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = creditCard.CashAmount * (-1),
+                    CreditCardId = creditCard.Id,
+                    CreditCardTypeId = 1001,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3005,
+                    UserId = account.UserId
+                });
+                ts.Complete();
+            }
+        }
+
+        public void PayDebtCreditCard(CreditCardModel creditCard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                var account = usersFcd.GetUserAccountById(creditCard.AccountId);
+                var provisionAmount = creditCard.CashAmount - creditCard.Debit;
+                if (provisionAmount < 0) { provisionAmount = 0; }
+                var debitAmount = creditCard.CashAmount - provisionAmount;
+
+                creditCard.Debit -= debitAmount;
+                creditCard.Provision -= provisionAmount;
+                cardsDAO.UpdateCreditCard(creditCard);
+                cardsDAO.DepositMoneyToAccount((int)Consts.Consts.AccountNumbers.SystemAccountId, creditCard.CashAmount);
+                cardsDAO.WithdrawMoneyFromAccount(creditCard.AccountId, creditCard.CashAmount);
+                cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                {
+                    BalanceChange = creditCard.CashAmount * (-1),
+                    CreditCardId = creditCard.Id,
+                    CreditCardTypeId = 1001,
+                    DateIssued = DateTime.Now,
+                    OperationTypeId = 3006,
+                    UserId = account.UserId
+                });
+                ts.Complete();
+            }
+        }
+
+        public void NextGracePeriod(CreditCardModel creditCard)
+        {
+            using (var ts = new TransactionScope())
+            {
+                var account = usersFcd.GetUserAccountById(creditCard.AccountId);
+                var provisionAmount = (creditCard.Debit * creditCard.InterestRate) / 100;
+                if (provisionAmount > 0)
+                {
+                    creditCard.Provision += provisionAmount;
+                    cardsDAO.UpdateCreditCard(creditCard);
+                    cardsDAO.CreateOperationHistory(new DAL.PaymentCardsOperationHistory()
+                    {
+                        BalanceChange = provisionAmount,
+                        CreditCardId = creditCard.Id,
+                        CreditCardTypeId = 1001,
+                        DateIssued = DateTime.Now,
+                        OperationTypeId = 3007,
+                        UserId = account.UserId
+                    });
+                }
                 ts.Complete();
             }
         }

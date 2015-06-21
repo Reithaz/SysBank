@@ -1,0 +1,97 @@
+﻿@model SysBank.BLL.Models.CreditCardModel
+
+@{
+    ViewBag.Title = "CreditCardSim";
+}
+
+
+<div>
+    <h4>Symulacja dla karty kredytowej</h4>
+    <hr />
+@using (@Html.BeginForm()){
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Limit) zł
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Provision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provision) zł 
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterestRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterestRate) %
+        </dd>
+
+        <dt> 
+            @Html.DisplayNameFor(model => model.Debit) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Debit) zł
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsContactless)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsContactless)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MinimalRepayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinimalRepayment) zł
+        </dd>
+
+        <dt>@Html.DisplayNameFor(model => model.AccountId)</dt>
+        <dd>@Html.DropDownListFor(model => model.AccountId, Model.Accounts, new { style = "width: 380px;" })</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.CashAmount)</dt>
+        <dd>@Html.TextBoxFor(model => model.CashAmount)</dd>
+
+        <font color="red">@Html.DisplayFor(x => x.ErrorDetails)</font>
+        <br />
+    </dl>
+    @Html.HiddenFor(x => x.AccountId)
+    @Html.HiddenFor(x => x.Debit)
+    @Html.HiddenFor(x => x.BaseCard)
+    @Html.HiddenFor(x => x.BaseCard.CardNumber)
+    @Html.HiddenFor(x => x.BaseCard.CreationDate)
+    @Html.HiddenFor(x => x.BaseCard.CreationDateShort)
+    @Html.HiddenFor(x => x.BaseCard.ExpirationDate)
+    @Html.HiddenFor(x => x.BaseCard.ExpirationDateShort)
+    @Html.HiddenFor(x => x.BaseCard.IsBlocked)
+    @Html.HiddenFor(x => x.BaseCard.Id)
+    @Html.HiddenFor(x => x.BaseCard.IsBlockedString)
+    @Html.HiddenFor(x => x.BaseCard.Type)
+    @Html.HiddenFor(x => x.BaseCard.TypeId)
+    @Html.HiddenFor(x => x.BaseCardId)
+    @Html.HiddenFor(x => x.GracePeriod)
+    @Html.HiddenFor(x => x.GracePeriodCount)
+    @Html.HiddenFor(x => x.ErrorDetails)
+    @Html.HiddenFor(x => x.InterestRate)
+    @Html.HiddenFor(x => x.UserId)
+    @Html.HiddenFor(x => x.IsContactless)
+    @Html.HiddenFor(x => x.Limit)
+    @Html.HiddenFor(x => x.MinimalRepayment)
+    @Html.HiddenFor(x => x.Provision)
+    <input type="submit" name="PayWithCreditCard" value="Zapłać" />    
+    <input type="submit" name="PayDebtCreditCard" value="Spłata zadłużenia" />
+    <input type="submit" name="NextGracePeriod" value="Symuluj następny okres rozliczeniowy" />
+}
+</div>
+<p>
+
+</p>
