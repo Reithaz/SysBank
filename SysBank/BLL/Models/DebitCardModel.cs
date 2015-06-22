@@ -24,8 +24,9 @@ namespace SysBank.BLL.Models
         public decimal CashAmount { get; set; }
         public decimal BlockedCashAmount { get; set; }
         public PaymentCardsModel BaseCard { get; set; }
-
+        [Display(Name="Limit miesięczny")]
         public decimal MonthlyLimit { get; set; }
+        [Display(Name="Wykorzystany limit miesięczny")]
         public decimal UsedMonthlyLimit { get; set; }
         public string ErrorDetails { get; set; }
         public string UserId { get; set; }

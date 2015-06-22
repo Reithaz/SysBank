@@ -130,7 +130,7 @@ namespace SysBank.Controllers
             accounts = usersFcd.GetUserAccountsByUserId(User.Identity.GetUserId()).Select(
                 x => new SelectListItem()
                 {
-                    Text = String.Format("{0} (Dostępne środki: {1} zł)", x.AccountNumber, (x.AvailableBalance - x.BlockedBalance).ToString().Remove((x.AvailableBalance - x.BlockedBalance).ToString().Length - 1)),
+                    Text = String.Format("{0} (Dostępne środki: {1} zł)", x.AccountNumber, (x.AvailableBalance).ToString().Remove((x.AvailableBalance).ToString().Length - 1)),
                     Value = x.Id.ToString()
                 }).ToList();
             cardModel.Accounts = accounts;
@@ -172,10 +172,11 @@ namespace SysBank.Controllers
         [HttpParamAction]
         public ActionResult ATMWithdrawMoney(ATMCardModel atmcard){
             atmcard.ErrorDetails = "";
+            var account = usersFcd.GetUserAccountById(atmcard.AccountId);
             if (atmcard.CashAmount <= 0) { atmcard.ErrorDetails = "Podana kwota musi być większa od zera"; }
             else
             {
-                if (atmcard.CashAmount > atmcard.AvailableBalance)
+                if (atmcard.CashAmount > atmcard.AvailableBalance - account.BlockedBalance)
                 {
                     atmcard.ErrorDetails += "Brak wystarczających środków na koncie. ";
                 }
